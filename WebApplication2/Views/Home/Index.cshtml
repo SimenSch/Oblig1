@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript">
+    function antallMinus() {
+        var voksne = document.getElementById("voksen").value;
+        var sum = parseInt(voksne) - 1;
+        document.getElementById("voksen").value = sum;
+    }
+    
+    function antallPluss() {
+        var voksne = document.getElementById("voksen").value;
+        var sum = parseInt(voksne) + 1;
+        document.getElementById("voksen").value = sum;
+    }
+
+</script>
+<h2>Bestill flybilett</h2>
+<form action="index" method="post">
+    <table>
+        <tr>
+            <td>Fra: </td>
+            <td><input type="text" name="fraDest"></td>
+
+            <td>Til: </td>
+            <td><input type="text" name="tilDest"></td>
+            
+        </tr>
+        <tr>
+            <td>
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <th>Tur/retur</th>
+            <th><input type="radio" name="reiseType" value="TR" checked="checked"></th>
+            <th>Enkelreise</th>
+            <th><input type="radio" name="reiseType" value="Enkel"></th>
+        </tr>
+        <tr>
+            <td>Utreise: </td>
+            <td><input type="date" name="Utreise"></td>
+
+            <td>Hjemreise: </td>
+            <td><input type="date" name="Hjemreise"></td>
+        </tr>
+        <tr>
+            <td>
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Reisende: </strong></td> 
+        </tr>
+        <tr>
+            <td>Voksen <br/> </td>
+            <td>
+                <input type="button" onclick="antallMinus()" value="-" class="btn-danger"/>
+                <input  id="voksen" type="text" class="col-lg-3" value="1"/>
+                <input type="button" onclick="antallPluss()" value="+" class="btn-success" />
+                <input type="button" onclick="" value="Legg til barn" class="btn-warning" />
+            </td>
+        
+            
+        </tr>
+        <tr>
+            <td><input type="submit" name="Bestill" value="Bestill" class="btn btn-success"></td>
+        </tr>
+
+
+    </table>
+</form>
