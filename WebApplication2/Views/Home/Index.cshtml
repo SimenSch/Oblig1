@@ -1,31 +1,68 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 <script type="text/javascript">
-    function antallMinus() {
+    function voksenMinus() {
         var voksne = document.getElementById("voksen").value;
-        var sum = parseInt(voksne) - 1;
-        document.getElementById("voksen").value = sum;
+        if (voksne > 0) {
+            var sum = parseInt(voksne) - 1;
+            document.getElementById("voksen").value = sum;
+        }
     }
-    
-    function antallPluss() {
+    function voksenPluss() {
         var voksne = document.getElementById("voksen").value;
-        var sum = parseInt(voksne) + 1;
-        document.getElementById("voksen").value = sum;
+        if (voksne < 9) {
+            var sum = parseInt(voksne) + 1;
+            document.getElementById("voksen").value = sum;
+        }
+
+    }
+    function barnMinus() {
+        var barn = document.getElementById("barn").value;
+        if (barn > 0) {
+            var sum = parseInt(barn) - 1;
+            document.getElementById("barn").value = sum;
+        }
+
+    }
+    function barnPluss() {
+        var barn = document.getElementById("barn").value;
+        if (barn < 9) {
+            var sum = parseInt(barn) + 1;
+            document.getElementById("barn").value = sum;
+        }
+
+    }
+    function visBarn() {
+        var display = document.getElementById("barnDisplay").style;
+        display.display = 'table-row';
+        document.getElementById("leggTilBarn").style.visibility = "hidden";
+
+    }
+    function skjulHjemreise() {
+        if (document.getElementById("enkel").checked) {
+            var hjemReise = document.getElementById("hjemReise").style.visibility = "hidden";
+            var hjemReise = document.getElementById("hjemReiseText").style.visibility = "hidden";
+        }
+        if (document.getElementById("turRetur").checked) {
+            var hjemReise = document.getElementById("hjemReise").style.visibility = "visible";
+            var hjemReise = document.getElementById("hjemReiseText").style.visibility = "visible";
+        }
+
+
     }
 
 </script>
-<h2>Bestill flybilett</h2>
-<form action="index" method="post">
+<h2>Bestill Flybillett</h2>
+<form action="" method="post">
     <table>
         <tr>
             <td>Fra: </td>
-            <td><input type="text" name="fraDest"></td>
+            <td><input type="text" name="fraDest" class="form-control"></td>
 
             <td>Til: </td>
-            <td><input type="text" name="tilDest"></td>
-            
+            <td><input type="text" name="tilDest" class="form-control"></td>
+
         </tr>
         <tr>
             <td>
@@ -34,16 +71,16 @@
         </tr>
         <tr>
             <th>Tur/retur</th>
-            <th><input type="radio" name="reiseType" value="TR" checked="checked"></th>
+            <th><input id="turRetur" type="radio" name="reiseType" value="TR" onchange="skjulHjemreise()" checked="checked" /></th>
             <th>Enkelreise</th>
-            <th><input type="radio" name="reiseType" value="Enkel"></th>
+            <th><input id="enkel" type="radio" name="reiseType" value="Enkel" onchange="skjulHjemreise()"></th>
         </tr>
         <tr>
             <td>Utreise: </td>
-            <td><input type="date" name="Utreise"></td>
+            <td><input type="date" name="Utreise" class="form-control"></td>
 
-            <td>Hjemreise: </td>
-            <td><input type="date" name="Hjemreise"></td>
+            <td id="hjemReiseText">Hjemreise: </td>
+            <td id="hjemReise"><input type="date" name="Hjemreise" class="form-control"></td>
         </tr>
         <tr>
             <td>
@@ -51,18 +88,27 @@
             </td>
         </tr>
         <tr>
-            <td><strong>Reisende: </strong></td> 
+            <td><strong>Reisende: </strong></td>
         </tr>
         <tr>
-            <td>Voksen <br/> </td>
+            <td>Voksen <br /> </td>
             <td>
-                <input type="button" onclick="antallMinus()" value="-" class="btn-danger"/>
-                <input  id="voksen" type="text" class="col-lg-3" value="1"/>
-                <input type="button" onclick="antallPluss()" value="+" class="btn-success" />
-                <input type="button" onclick="" value="Legg til barn" class="btn-warning" />
+                <input type="button" onclick="voksenMinus()" value="-" class="btn-danger" />
+                <input id="voksen" type="text" class="col-lg-3" value="1" />
+                <input type="button" onclick="voksenPluss()" value="+" class="btn-success" />
+                <input id="leggTilBarn" type="button" onclick="visBarn()" value="Legg til barn" class="btn-warning" />
             </td>
-        
-            
+        </tr>
+        <tr>
+            <td><br /></td>
+        </tr>
+        <tr id="barnDisplay" style="display:none;">
+            <td>Barn(0-13) </td>
+            <td>
+                <input type="button" onclick="barnMinus()" value="-" class="btn-danger" />
+                <input id="barn" type="text" class="col-lg-3" value="0" />
+                <input type="button" onclick="barnPluss()" value="+" class="btn-success" />
+            </td>
         </tr>
         <tr>
             <td><input type="submit" name="Bestill" value="Bestill" class="btn btn-success"></td>
