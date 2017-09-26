@@ -13,6 +13,11 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
+
+        public ActionResult Registrer()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult Registrer(Models.Kunde innKunde, Models.Reise innReise)
         {
@@ -42,6 +47,24 @@ namespace WebApplication2.Controllers
                 return View(alleKunder);
             }
             
+        }
+
+        public ActionResult Slett(int Id)
+        {
+            using (var db = new Models.DB())
+            {
+                try
+                {
+                    Models.Kunde slettKunde = db.Kunder.Find(Id);
+                    db.Kunder.Remove(slettKunde);
+                    db.SaveChanges();
+                }
+                catch (Exception feil)
+                {
+                    // her bør det komme noe mer
+                }
+            }
+            return RedirectToAction("Liste");
         }
     }
 }

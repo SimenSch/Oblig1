@@ -11,7 +11,7 @@ namespace WebApplication2.Models
         public string ForNavn { get; set; }
         public string EtterNavn { get; set; }
 
-        public int Tlf { get; set; }
+        public int Telefon { get; set; }
         public string Epost { get; set; }
         
     }
