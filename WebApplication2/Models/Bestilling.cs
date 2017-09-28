@@ -5,8 +5,11 @@ using System.Web;
 
 namespace WebApplication2.Models
 {
-    public class Kunde
+
+
+    public class Bestilling
     {
+    
         public int Id { get; set; }
 
         public string ForNavn { get; set; }
@@ -17,7 +20,10 @@ namespace WebApplication2.Models
 
         public string Epost { get; set; }
 
-        public virtual List<Bestilling> Bestilling {get; set;}
-        
+        public virtual Kunde Kunde { get; set; }
+
+        public virtual Reise Reise { get; set; }
     }
+
 }
+

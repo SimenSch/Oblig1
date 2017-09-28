@@ -13,12 +13,18 @@ namespace WebApplication2.Models
             : base("name=Kunde")
         {
             Database.CreateIfNotExists();
+
+            Database.SetInitializer(new DBinit());
         }
-        public DbSet<Kunde> Kunder { get; set; }
-        public DbSet<Reise> Reiser { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+        public virtual DbSet<Kunde> Kunder { get; set; }
+
+        public virtual DbSet<Reise> Reiser { get; set; }
+
+        public virtual DbSet<Bestilling> Bestilling { get; set; }
     }
 }
+    
