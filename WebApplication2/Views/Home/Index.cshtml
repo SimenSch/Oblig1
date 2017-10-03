@@ -3,15 +3,16 @@
 @{
     ViewBag.Title = "Index";
 }
+
 <script>
     function skjul() {
         var x = document.getElementById("HjemReise").style.display = 'none';
 
-    } 
+    }
     function vis() {
         var x = document.getElementById("HjemReise").style.display = 'block';
 
-    } 
+    }
     function voksenMinus() {
         var voksne = document.getElementById("voksen").value;
         if (voksne > 0) {
@@ -49,25 +50,50 @@
         document.getElementById("leggTilBarn").style.visibility = "hidden";
 
     }
-   
-    
+    function sokFlybilletter() {
+        document.getElementById("flyReiser").style.display = 'block';
+
+
+    }
+
+    function datoSjekkUtreise(dato) {
+
+
+        var date = new Date();
+        var idag = new Date(dato);
+        idag.setHours(0, 0, 0, 0);
+
+        if (date > idag) {
+            alert("Dato ikke gyldig!");
+        }
+        idag.setDate(idag.getDate() + 7);
+        idag.toLocaleDateString();
+        document.getElementById("hjemDato").value = idag;
+
+    }
+
+
+
+
+
+
 </script>
 
 
 <h2>Bestill Flybilletter</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })  
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
             <h4 class="control-label col-md-2">Fra</h4>
             <div class="col-md-10">
-                <input type="text" name="fraDest" class="form-control"/>
+                <input type="text" name="fraDest" class="form-control" />
             </div>
         </div>
         <div class="form-group">
@@ -76,68 +102,69 @@
                 <input type="text" name="fraDest" class="form-control" />
             </div>
         </div>
-       
-@*
-        <div class="form-group">
-            @Html.LabelFor(model => rute.fra, htmlAttributes: new { @class = "control-label col-md-2" })
-          <div class="col-md-10">
-            @Html.EditorFor(model => rute.fra, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => rute.fra, "", new { @class = "text-danger" })
-          </div>
 
+        @*
             <div class="form-group">
-            @Html.LabelFor(model => rute.til, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => rute.til, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => rute.til, "", new { @class = "text-danger" })
-            </div>
-*@
+                @Html.LabelFor(model => rute.fra, htmlAttributes: new { @class = "control-label col-md-2" })
+              <div class="col-md-10">
+                @Html.EditorFor(model => rute.fra, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => rute.fra, "", new { @class = "text-danger" })
+              </div>
+
+                <div class="form-group">
+                @Html.LabelFor(model => rute.til, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => rute.til, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => rute.til, "", new { @class = "text-danger" })
+                </div>
+        *@
         <div class="form-group">
             <div class="control-label col-md-2">
                 <h4>
                     Tur/retur <input type="radio" name="reiseType" checked="checked" onclick="vis()" />
                 </h4>
-            </div>  
+            </div>
             <div class="control-label col-md-2">
                 <h4>
-                    Enkelreise <input type="radio" name="reiseType" class="" onclick="skjul()"/>
+                    Enkelreise <input type="radio" name="reiseType" class="" onclick="skjul()" />
                 </h4>
-            </div>  
+            </div>
 
         </div>
-        
-                <div class="form-group">
-                    <h4 class="control-label col-md-2">Utreise</h4>
-                    <div class="col-md-10">
-                        <input type="date" name="utreise" class="form-control" />
-                    </div>
-                </div>
 
-                <div id="HjemReise" class="form-group" style=" display:block">
-                    <h4 class="control-label col-md-2">Hjemreise</h4>
-                    <div class="col-md-10">
-                        <input type="date" name="hjemreise" class="form-control" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <h4 class="control-label col-md-2">
-                        <Strong>Reisende:</Strong>
-                    </h4>
-                </div>
         <div class="form-group">
-            <h4 class="control-label col-md-2">Voksen:
+            <h4 class="control-label col-md-2">Utreise</h4>
+            <div class="col-md-10">
+                <input type="date" name="utreise" class="form-control" min="2017-10-03" onchange="datoSjekkUtreise(this.value)" />
+            </div>
+        </div>
+
+        <div id="HjemReise" class="form-group" style=" display:block">
+            <h4 class="control-label col-md-2">Hjemreise</h4>
+            <div class="col-md-10">
+                <input id="hjemDato" type="date" name="hjemreise" class="form-control" min="2017-10-03" onchange="datoSjekkHjemreise(this.value)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4 class="control-label col-md-2">
+                <Strong>Reisende:</Strong>
+            </h4>
+        </div>
+        <div class="form-group">
+            <h4 class="control-label col-md-2">
+                Voksen:
             </h4>
             <div class="col-md-2">
                 <input id="voksen" type="number" name="Antall" class="form-control" value="0" />
             </div>
             <input type="button" class="btn-danger" onclick="voksenMinus()" value="-" />
             <input type="button" class="btn-success" onclick="voksenPluss()" value="+" />
-            <input id="leggTilBarn" type="button" class="btn-warning" onclick="visBarn()" value="Legg til barn"/>
+            <input id="leggTilBarn" type="button" class="btn-warning" onclick="visBarn()" value="Legg til barn" />
         </div>
-        <div class="form-group" id="barnDisplay" style="display:none" >
+        <div class="form-group" id="barnDisplay" style="display:none">
             <h4 class="control-label col-md-2">
-                Barn:
+                Barn(0-13):
             </h4>
             <div class="col-md-2">
                 <input id="barn" type="number" name="Antall" class="form-control" value="0" />
@@ -145,17 +172,59 @@
             <input type="button" class="btn-danger" onclick="barnMinus()" value="-" />
             <input type="button" class="btn-success" onclick="barnPluss()" value="+" />
         </div>
-        
-                
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Søk billetter" class="btn btn-success" />
-                    </div>
-                </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Søk billetter" class="btn btn-success" onclick="sokFlybilletter()" />
             </div>
+        </div>
+    </div>
 }
+    
 
-<div>
-    @Html.ActionLink("Til Register ", "Registrer")
+
+<div id="flyReiser" class="container" style="display:none">
+    <h2>Velg reise:</h2>
+    <div class="table-bordered">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Fra:</th>
+                    <th>Til:</th>
+                    <th>Fra dato:</th>
+                    <th>Til dato:</th>
+                    <th>Antall person:</th>
+                    <th>Pris:</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Oslo</td>
+                    <td>Bergen</td>
+                    <td>10.10.17</td>
+                    <td>17.10.17</td>
+                    <td>2</td>
+                    <td>2000.kr</td>
+                    <td><button class="btn-success">Kjøp</button></td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>Oslo</td>
+                    <td>Trondheim</td>
+                    <td>10.10.17</td>
+                    <td>17.10.17</td>
+                    <td>2</td>
+                    <td>2500.kr</td>
+                    <td><button class="btn-success">Kjøp</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+        <div>
+            @Html.ActionLink("Til Register ", "Registrer")
+        </div>
