@@ -3,8 +3,22 @@
 @{
     ViewBag.Title = "Index";
 }
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    ////JQ
+    $(function(){
+        $("#utreiseDato").click(function() {
+          //  $("#utreiseDato").css("background-color","blue");
+        })
 
-<script>
+        $(document).ready(function () {
+            $("#utreiseDato").datepicker({
+                minDate: 0,
+                // ...
+            });
+        });
+    });
+    ////JavaScript
     function skjul() {
         var x = document.getElementById("HjemReise").style.display = 'none';
 
@@ -15,7 +29,7 @@
     }
     function voksenMinus() {
         var voksne = document.getElementById("voksen").value;
-        if (voksne > 0) {
+        if (voksne > 1) {
             var sum = parseInt(voksne) - 1;
             document.getElementById("voksen").value = sum;
         }
@@ -58,24 +72,65 @@
 
     function datoSjekkUtreise(dato) {
 
-
         var date = new Date();
         var idag = new Date(dato);
         idag.setHours(0, 0, 0, 0);
 
         if (date > idag) {
             alert("Dato ikke gyldig!");
+            var dagenIdag = date.toISOString().slice(0, 10).replace(/-/g, "-");
+            document.getElementById("utreiseDato").value = dagenIdag;
         }
-        idag.setDate(idag.getDate() + 7);
-        idag.toLocaleDateString();
-        document.getElementById("hjemDato").value = idag;
+        idag.setDate(idag.getDate() + 8);
+        var dagens = idag.toISOString().slice(0, 10).replace(/-/g, "-");
+        document.getElementById("hjemDato").value = dagens;
+    }
+    function datoSjekkHjemreise(dato) {
+        var date = new Date();
+        var idag = new Date(dato);
+        idag.setHours(0, 0, 0, 0);
+        var utreiseDato = document.getElementById("utreiseDato").value;
+        var dagens = idag.toISOString().slice(0, 10).replace(/-/g, "-");
+        //alert(dagens);
+
+        if (date > idag || dagens < utreiseDato) {
+            alert("Dato ikke gyldig!");
+
+        }
+        
+    }
+    function valideringTil(til) {
+        var input = document.getElementById("from");
+        var val = document.getElementById("valideringFra");
+        if (til == "Oslo" || til == "Trondheim" || til == "Bergen" || til == "Stavanger" ) {
+            input.style.borderColor = "Green";
+            val.style.color = "Green";
+            val.innerHTML = "✓";
+        }
+        else {
+            document.getElementById("from").style.borderColor = "Red";
+
+            val.innerHTML = "Vennligst velg en av destinasjonene i listen";
+            val.style.color = "Red";
+        }
 
     }
+    function valideringFra(fra) {
+        var input = document.getElementById("to");
+        var val = document.getElementById("valideringTil");
+        if (fra == "Oslo" || fra == "Trondheim" || fra == "Bergen" || fra == "Stavanger") {
+            input.style.borderColor = "Green";
+            val.style.color = "Green";
+            val.innerHTML = "✓";
+        }
+        else {
+            document.getElementById("to").style.borderColor = "Red";
 
+            val.innerHTML = "Vennligst velg en av destinasjonene i listen";
+            val.style.color = "Red";
+        }
 
-
-
-
+    }
 
 </script>
 
@@ -92,15 +147,17 @@
 
         <div class="form-group">
             <h4 class="control-label col-md-2">Fra</h4>
-            <div class="col-md-10">
-                <input type="text" name="fraDest" class="form-control" />
+            <div class="col-md-3">
+                <input id="from" type="text" name="fraDest" class="form-control" onchange="valideringTil(this.value)" />   
             </div>
+            <h5 id="valideringFra"></h5>
         </div>
         <div class="form-group">
             <h4 class="control-label col-md-2">Til</h4>
-            <div class="col-md-4">
-                <input type="text" name="fraDest" class="form-control" />
+            <div class="col-md-3">  
+                <input id ="to" type="text" name="fraDest" class="form-control" onchange="valideringFra(this.value)" />
             </div>
+            <h5 id="valideringTil"></h5>
         </div>
 
         @*
@@ -135,7 +192,7 @@
         <div class="form-group">
             <h4 class="control-label col-md-2">Utreise</h4>
             <div class="col-md-10">
-                <input type="date" name="utreise" class="form-control" min="2017-10-03" onchange="datoSjekkUtreise(this.value)" />
+                <input id="utreiseDato" type="date" name="utreise" class="form-control" min="2017-10-03"  onchange="datoSjekkUtreise(this.value)" />
             </div>
         </div>
 
@@ -156,7 +213,7 @@
                 Voksen:
             </h4>
             <div class="col-md-2">
-                <input id="voksen" type="number" name="Antall" class="form-control" value="0" />
+                <input id="voksen" type="text" name="Antall" class="form-control" value="1" pattern = "[0-9]{2}" title="Velg mellom 1 og 9 voksne" />
             </div>
             <input type="button" class="btn-danger" onclick="voksenMinus()" value="-" />
             <input type="button" class="btn-success" onclick="voksenPluss()" value="+" />
