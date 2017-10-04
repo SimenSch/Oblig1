@@ -10,6 +10,14 @@ namespace WebApplication2.Models
     {
 	    protected override void Seed(DB context)
 	    {
+            var nyKunde = new Kunde
+            {
+                forNavn = "fredrik",
+                etterNavn = "tremann",
+                telefon = 33445569,
+                epost = "tremanntoman@bajseflass.cem",
+
+            };
             var nyReise = new Reise
             {
             Utreise = "",
@@ -22,8 +30,19 @@ namespace WebApplication2.Models
 
             Pris = 0,
 
+            };;
+            var nybestilling = new Bestilling
+            {
+                reiseId = nyReise.Id,
+                kundeId = nyKunde.Id
             };
-            
+            context.Kunder.Add(nyKunde);
+            context.Reiser.Add(nyReise);
+            context.Bestillinger.Add(nybestilling);
+            base.Seed(context);
+           
+               
+           
         }
     }
 }
