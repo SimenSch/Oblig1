@@ -24,9 +24,9 @@ namespace WebApplication2.Models
 
             Hjemreise = "",
 
-            TurTid = 0,
+            TurTid = "0",
 
-            ReturTid = 0,
+            ReturTid = "0",
 
             Pris = 0,
 

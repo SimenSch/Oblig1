@@ -10,12 +10,12 @@ namespace WebApplication2.Models
         public int Id { get; set; }
 
         public string Utreise { get; set; }
-
+        
         public string Hjemreise { get; set; }
-
-        public int TurTid{ get; set; }
-
-        public int ReturTid { get; set; }
+        
+        public string TurTid{ get; set; }
+        
+        public string ReturTid { get; set; }
 
         public int Pris{ get; set; }
 
