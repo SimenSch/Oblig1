@@ -3,31 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using WebApplication2.Models;
 namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
+        private DB db = new DB();
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+          var alleReiser = db.Reiser.ToList();
+            return View(alleReiser);
         }
 
-        public ActionResult Registrer()
-        {
-            return View();
-        }
+        
         [HttpPost]
-        public ActionResult Registrer(Models.Kunde innKunde, Models.Reise innReise)
+        public ActionResult Registrer(Models.Kunde innKunde)
         {
             using (var db = new Models.DB())
             {
                 try
                 {
                     db.Kunder.Add(innKunde);
-                    db.SaveChanges();
-                    db.Reiser.Add(innReise);
                     db.SaveChanges();
                 }
                 catch (Exception feil)

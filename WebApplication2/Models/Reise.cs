@@ -13,7 +13,7 @@ namespace WebApplication2.Models
 
         public string Hjemreise { get; set; }
 
-        public int TurTid { get; set; }
+        public int TurTid{ get; set; }
 
         public int ReturTid { get; set; }
 

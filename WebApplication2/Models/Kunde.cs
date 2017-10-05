@@ -9,13 +9,13 @@ namespace WebApplication2.Models
     {
         public int Id { get; set; }
 
-        public string ForNavn { get; set; }
+        public string forNavn { get; set; }
 
-        public string EtterNavn { get; set; }
+        public string etterNavn { get; set; }
 
-        public int Telefon { get; set; }
+        public int telefon { get; set; }
 
-        public string Epost { get; set; }
+        public string epost { get; set; }
 
         public virtual List<Bestilling> Bestilling {get; set;}
         

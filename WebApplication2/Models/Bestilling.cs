@@ -11,15 +11,8 @@ namespace WebApplication2.Models
     {
     
         public int Id { get; set; }
-
-        public string ForNavn { get; set; }
-
-        public string EtterNavn { get; set; }
-
-        public int Telefon { get; set; }
-
-        public string Epost { get; set; }
-
+        public int reiseId { get; set; }
+        public int kundeId { get; set; }
         public virtual Kunde Kunde { get; set; }
 
         public virtual Reise Reise { get; set; }
