@@ -12,11 +12,15 @@ namespace WebApplication2.Models
 	    {
             var nyKunde = new Kunde
             {
-                forNavn = "fredrik",
-                etterNavn = "tremann",
-                telefon = 33445569,
-                epost = "tremanntoman@bajseflass.cem",
+                Fornavn = "fredrik",
+                Etternavn = "tremann",
+                
 
+            };
+            var nyKontaktInfo = new Kontaktinfo
+            {
+                Telefon = 33445569,
+                Epost = "tremanntoma@bajseflass.cem"
             };
             var nyReise = new Reise
             {
@@ -24,19 +28,56 @@ namespace WebApplication2.Models
 
             Hjemreise = "",
 
-            TurTid = "0",
+            Turtid = "0",
 
-            ReturTid = "0",
+            Returtid = "0",
 
-            Pris = 0,
+            Billettpris = 0,
 
             };;
             var nybestilling = new Bestilling
             {
-                reiseId = nyReise.Id,
-                kundeId = nyKunde.Id
+                Reiseid = nyReise.Id,
+                Kundeid = nyKunde.Id
             };
-            context.Kunder.Add(nyKunde);
+            var nyDestinasjon1 = new Destinasjoner
+            {
+                Flyplass = "Oslo",
+                Pris = 599
+            };
+            
+            var nyDestinasjon2 = new Destinasjoner
+            {
+                Flyplass = "Trondheim",
+                Pris = 399
+            };
+            var nyDestinasjon3 = new Destinasjoner
+            {
+                Flyplass = "Tromsø",
+                Pris = 799
+            };
+            var nyDestinasjon4 = new Destinasjoner
+            {
+                Flyplass = "Bergen",
+                Pris = 499
+            };
+            var nyDestinasjon5 = new Destinasjoner
+            {
+                Flyplass = "Stavanger",
+                Pris = 399
+            };
+            var nyDestinasjon6 = new Destinasjoner
+            {
+                Flyplass = "Torp",
+                Pris = 299
+            };
+            context.Destinasjoner.Add(nyDestinasjon1);
+            context.Destinasjoner.Add(nyDestinasjon2);
+            context.Destinasjoner.Add(nyDestinasjon3);
+            context.Destinasjoner.Add(nyDestinasjon4);
+            context.Destinasjoner.Add(nyDestinasjon5);
+            context.Destinasjoner.Add(nyDestinasjon6);
+            context.alleBestillinger.Add(nyKunde);
             context.Reiser.Add(nyReise);
             context.Bestillinger.Add(nybestilling);
             base.Seed(context);

@@ -5,16 +5,10 @@ using System.Web;
 
 namespace WebApplication2.Models
 {
-
-
-    public class bestilling
+    public class destinasjoner
     {
-    
         public int id { get; set; }
-        public int reiseid { get; set; }
-        public int kundeid { get; set; }
-     
+        public string flyplass { get; set; }
+        public int pris { get; set; }
     }
-
 }
-

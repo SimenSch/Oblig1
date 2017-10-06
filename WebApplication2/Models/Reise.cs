@@ -5,20 +5,20 @@ using System.Web;
 
 namespace WebApplication2.Models
 {
-    public class Reise
+    public class reise
     {
-        public int Id { get; set; }
+        public int id { get; set; }
 
-        public string Utreise { get; set; }
+        public string utreise { get; set; }
         
-        public string Hjemreise { get; set; }
+        public string hjemreise { get; set; }
         
-        public string TurTid{ get; set; }
+        public string turtid{ get; set; }
         
-        public string ReturTid { get; set; }
+        public string returtid { get; set; }
 
-        public int Pris{ get; set; }
+        public int billettpris{ get; set; }
 
-        public virtual List<Bestilling> Bestilling{ get; set; }
+       
     }
 }

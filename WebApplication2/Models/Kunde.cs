@@ -5,19 +5,19 @@ using System.Web;
 
 namespace WebApplication2.Models
 {
-    public class Kunde
+    public class kunde
     {
-        public int Id { get; set; }
+        public int id { get; set; }
 
-        public string forNavn { get; set; }
+        public string fornavn { get; set; }
 
-        public string etterNavn { get; set; }
+        public string etternavn { get; set; }
 
         public int telefon { get; set; }
 
         public string epost { get; set; }
 
-        public virtual List<Bestilling> Bestilling {get; set;}
+        
         
     }
 }

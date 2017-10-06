@@ -29,13 +29,13 @@ namespace WebApplication2.Controllers
 
         
         [HttpPost]
-        public ActionResult Registrer(Models.Kunde innKunde)
+        public ActionResult Registrer(Kunde innKunde)
         {
-            using (var db = new Models.DB())
-            {
+            
+            
                 try
                 {
-                    db.Kunder.Add(innKunde);
+                    db.alleBestillinger.Add(innKunde);
                     db.SaveChanges();
                 }
                 catch (Exception feil)
@@ -44,14 +44,14 @@ namespace WebApplication2.Controllers
 
                 }
                 return RedirectToAction("Liste");
-            }
+            
         }
         public ActionResult Liste()
         {
-            using (var db = new Models.DB())
+        
             {
-                List<Models.Kunde> alleKunder = db.Kunder.ToList();
-                List<Models.Reise> alleReiser = db.Reiser.ToList();
+                List<Kunde> alleKunder = db.alleBestillinger.ToList();
+                List<Reise> alleReiser = db.Reiser.ToList();
                 return View(alleKunder);
             }
             
@@ -59,12 +59,12 @@ namespace WebApplication2.Controllers
 
         public ActionResult Slett(int Id)
         {
-            using (var db = new Models.DB())
+            using (var db = new DB())
             {
                 try
                 {
-                    Models.Kunde slettKunde = db.Kunder.Find(Id);
-                    db.Kunder.Remove(slettKunde);
+                    Kunde slettKunde = db.alleBestillinger.Find(Id);
+                    db.alleBestillinger.Remove(slettKunde);
                     db.SaveChanges();
                 }
                 catch (Exception feil)
