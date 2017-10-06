@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using WebApplication2.Models;
+using System.Web.Script.Serialization;
+
 namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
@@ -26,8 +28,31 @@ namespace WebApplication2.Controllers
           var alleReiser = db.Reiser.ToList();
             return View(alleReiser);
         }
-
         
+        public string HentFlyplass()
+        {
+            using (var db = new DB())
+            {
+                List<Reise> alleFly = db.Reiser.ToList();
+
+                var alleFraFly = new List<string>();
+
+                foreach (Reise f in alleFly)
+                {
+                    string funnetStrekning = alleFraFly.FirstOrDefault(fl => fl.Contains(f.Utreise));
+                    if (funnetStrekning == null)
+                    {
+                        // ikke funnet strekning i listen, legg den inn i listen
+                        alleFraFly.Add(f.Utreise);
+                    }
+                }
+                var jsonSerializer = new JavaScriptSerializer();
+                return jsonSerializer.Serialize(alleFraFly);
+            }
+        }
+        /*
+         */
+
         [HttpPost]
         public ActionResult Registrer(Kunde innKunde)
         {
@@ -55,6 +80,15 @@ namespace WebApplication2.Controllers
                 return View(alleKunder);
             }
             
+        }
+        public ActionResult Kunde()
+        {
+            using (var db = new Models.DB())
+            {
+                List<Models.Reise> alleReiser = db.Reiser.ToList();
+                return View(alleReiser);
+            }
+
         }
 
         public ActionResult Slett(int Id)
