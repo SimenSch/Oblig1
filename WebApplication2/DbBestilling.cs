@@ -9,8 +9,21 @@ namespace WebApplication2
     public class DbBestilling
     {
         private DB db = new DB();
-        
-        public List<kunde> alleBestillinger()
+
+        public List<destinasjoner> alleDestinasjoner()
+        {
+
+            {
+                List<destinasjoner> alleDestinasjoner = db.Destinasjoner.Select(d => new destinasjoner
+                {
+                   flyplass = d.Flyplass,
+                   pris = d.Pris
+                    
+                }).ToList();
+                return alleDestinasjoner;
+            }
+        }
+            public List<kunde> alleBestillinger()
         {
              
             {
