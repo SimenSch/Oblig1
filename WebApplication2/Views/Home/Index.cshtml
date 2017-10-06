@@ -1,6 +1,4 @@
-﻿@model List<WebApplication2.Models.Reise>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 <script src="~/Scripts/jquery-3.2.1.min.js"></script>
@@ -25,21 +23,18 @@
             });
 
             function VisDropDown1(fraListe) {
-                var utStreng = "";
+
+                var utStreng = "<option value=''></option>";
                 for (var i in fraListe) {
                     utStreng += "<option value='" + fraListe[i] + "'>" + fraListe[i] + "</option>";
                 }
-               // $("#from").empty().append(utStreng);
+                $("#from").empty().append(utStreng);
             }
 
-            // opprett en hendelse på dropdown-listen fraFlyplass når siden lastes
-
-            $("#drop1").click(function () {
-                var valgtFlyplass = $(this).val();
+           // opprett en hendelse på dropdown-listen fraFlyplass når siden lastes      
                 $.ajax({
-                    url: '/Home/hentTilFlyplasser',
+                    url: '/Home/HentFlyplass',
                     type: 'GET',
-                    data: { fraFlyPlass: valgtFlyplass },
                     dataType: 'json',
                     success: function (tilListe) {
                         VisDropDown2(tilListe);
@@ -50,25 +45,21 @@
                 });
             });
 
-         /*   function VisDropDown2(tilListe) {
-                var utStreng = "";
+            function VisDropDown2(tilListe) {
+                var utStreng = "<option value=''></option>";
                 for (var i in tilListe) {
                     utStreng += "<option value='" + tilListe[i] + "'>" + tilListe[i] + "</option>";
                 }
-                $("#drop2").empty().append(utStreng);
+                $("#to").empty().append(utStreng);
             }
-
+         
              // opprett en hendelse på dropdown-listen valgtFlyplass når siden lastes
-            $("#drop2").click(function () {
+            $("#to").click(function () {
                 var valgtTilFlyplass = $(this).val();
-                var valgtFraFlyplass = $("#drop1").val();
+                var valgtFraFlyplass = $("#from").val();
                 $.ajax({
-                    url: '/Home/hentStrekning',
+                    url: '/Home/HentFlyplass',
                     type: 'GET',
-                    data: {
-                        fraFlyPlass: valgtFraFlyplass,
-                        tilFlyPlass: valgtTilFlyplass
-                    },
                     dataType: 'json',
                     success: function (strekninger) {
                         VisStrekninger(strekninger);
@@ -77,18 +68,10 @@
                         alert(x + '\n' + y + '\n' + z);
                     }
                 });
-            });*/
+            });
 
-            function VisStrekninger(strekninger) {
-                var utStreng = "<table class='table'><tr><th>Fra</th><th>Til</th><th>Dato</th><th>Tid</th><th>Pris</th></tr>";
-                for (var i in strekninger) {
-                    utStreng += "<tr><td>" + strekninger[i].fraFlyplass + "</td><td>" + strekninger[i].tilFlyplass +
-                        "</td><td>" + strekninger[i].dato + "</td><td>" + strekninger[i].tid + "</td><td>" + strekninger[i].pris + "<tr/>";
-                }
-                utStreng +="</table>"
-                $("#strekninger").empty().append(utStreng);
-            }
-        });
+
+            
 
 
 
@@ -206,7 +189,8 @@
         var val = document.getElementById("valideringFra");
         var ToInput = document.getElementById("to");
 
-        if (til == "Oslo" || til == "Trondheim" || til == "Bergen" || til == "Stavanger" || til == "Tromsø") {
+        if (til == "Oslo" || til == "Trondheim" || til == "Bergen"
+            || til == "Stavanger" || til == "Tromsø" || til == "Torp") {
             input.style.borderColor = "Green";
             val.style.color = "Green";
             val.innerHTML = "✓";
@@ -235,7 +219,8 @@
             val.style.color = "Red";
             valKontrollTil = false;
         } 
-        else if (fra == "Oslo" || fra == "Trondheim" || fra == "Bergen" || fra == "Stavanger" || fra == "Tromsø") {
+        else if (fra == "Oslo" || fra == "Trondheim" || fra == "Bergen"
+            || fra == "Stavanger" || fra == "Tromsø" || fra == "Torp") {
             input.style.borderColor = "Green";
             val.style.color = "Green";
             val.innerHTML = "✓";
@@ -316,12 +301,12 @@
             <h4 class="control-label col-md-2">Fra</h4>
             <div class="col-md-3">
                 <select id="from" class="form-control" onchange="valideringTil(this.value)">
-                    <option value=""></option>
+                    <!--<option value=""></option>
                     <option value="Trondheim">Trondheim</option>
                     <option value="Oslo">Oslo</option>
                     <option value="Bergen">Bergen</option>
                     <option value="Stavanger">Stavanger</option>
-                    <option value="Tromsø">Tromsø</option>
+                    <option value="Tromsø">Tromsø</option>-->
                 </select>
               <!--  <input id="from" type="text" name="fraDest" class="form-control" onchange="valideringTil(this.value)" />   -->
             </div>
@@ -443,20 +428,7 @@
 
                 </tr>
             </thead>
-            @foreach (var item in Model)
-            {
-                <tbody>
-                    <tr>
-                        <td>@item.Utreise</td>
-                        <td>@item.Hjemreise</td>
-                        <td>@item.TurTid</td>
-                        <td>@item.ReturTid</td>
-                        <td>2</td>
-                        <td>@item.Pris</td>
-                        <td><button class="btn-success">Kjøp</button></td>
-                    </tr>
-                </tbody>
-            }
+            
             <tbody>
                 <tr>
                     <td id="1">Oslo</td>

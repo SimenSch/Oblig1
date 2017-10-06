@@ -31,25 +31,24 @@ namespace WebApplication2.Controllers
         
         public string HentFlyplass()
         {
-            using (var db = new DB())
-            {
-                List<Reise> alleFly = db.Reiser.ToList();
+                List<Destinasjoner> alleFly = db.Destinasjoner.ToList();
 
                 var alleFraFly = new List<string>();
 
-                foreach (Reise f in alleFly)
+                foreach (Destinasjoner d in alleFly)
                 {
-                    string funnetStrekning = alleFraFly.FirstOrDefault(fl => fl.Contains(f.Utreise));
+                    string funnetStrekning = alleFraFly.FirstOrDefault(fl => fl.Contains(d.Flyplass));
                     if (funnetStrekning == null)
                     {
                         // ikke funnet strekning i listen, legg den inn i listen
-                        alleFraFly.Add(f.Utreise);
+                        alleFraFly.Add(d.Flyplass);
                     }
                 }
                 var jsonSerializer = new JavaScriptSerializer();
                 return jsonSerializer.Serialize(alleFraFly);
-            }
+            
         }
+
         /*
          */
 
