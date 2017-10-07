@@ -17,7 +17,7 @@ namespace WebApplication2.Models
 
         public string epost { get; set; }
 
-        
+        public string kontaktinfoid;
         
     }
 }

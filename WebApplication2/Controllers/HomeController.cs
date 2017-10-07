@@ -8,6 +8,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using WebApplication2.Models;
 using System.Web.Script.Serialization;
 
+
 namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
@@ -82,14 +83,21 @@ namespace WebApplication2.Controllers
         }
         public ActionResult Kunde()
         {
-            using (var db = new Models.DB())
+           
             {
-                List<Models.Reise> alleReiser = db.Reiser.ToList();
+                List<Reise> alleReiser = db.Reiser.ToList();
                 return View(alleReiser);
             }
 
         }
-
+        public ActionResult destinasjoner()
+        {
+            var db = new DbBestilling();
+            
+           
+            return View();
+            
+        }
         public ActionResult Slett(int Id)
         {
             using (var db = new DB())

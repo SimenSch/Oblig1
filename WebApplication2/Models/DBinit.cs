@@ -35,11 +35,7 @@ namespace WebApplication2.Models
             Billettpris = 0,
 
             };;
-            var nybestilling = new Bestilling
-            {
-                Reiseid = nyReise.Id,
-                Kundeid = nyKunde.Id
-            };
+            
             var nyDestinasjon1 = new Destinasjoner
             {
                 Flyplass = "Oslo",
@@ -77,9 +73,7 @@ namespace WebApplication2.Models
             context.Destinasjoner.Add(nyDestinasjon4);
             context.Destinasjoner.Add(nyDestinasjon5);
             context.Destinasjoner.Add(nyDestinasjon6);
-            context.alleBestillinger.Add(nyKunde);
-            context.Reiser.Add(nyReise);
-            context.Bestillinger.Add(nybestilling);
+            
             base.Seed(context);
            
                
