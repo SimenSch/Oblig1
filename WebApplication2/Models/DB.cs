@@ -10,7 +10,6 @@ namespace WebApplication2.Models
     public class Kunde
     {
         public int Id { get; set; }
-        public int KontaktId { get; set; }
         public string Fornavn { get; set; }
         public string Etternavn { get; set; }
         public virtual Kontaktinfo Kontaktinfo { get;set;}
@@ -22,8 +21,7 @@ namespace WebApplication2.Models
     public class Bestilling
     {
         public int Id { get; set; }
-        public int Reiseid { get; set; }
-        public int Kundeid { get; set; }
+        
         public virtual Kunde Kunde { get; set; }
 
         public virtual Reise Reise { get; set; }
@@ -50,6 +48,10 @@ namespace WebApplication2.Models
 
         public int Billettpris { get; set; }
 
+        public int Antall { get; set; }
+       
+        public  int? Antallbarn { get; set; }
+
         public virtual List<Bestilling> Bestilling { get; set; }
     }
     public class Destinasjoner
@@ -71,7 +73,7 @@ namespace WebApplication2.Models
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-
+        
         public virtual DbSet<Kunde> alleBestillinger { get; set; }
         public virtual DbSet<Kontaktinfo> Kontaktinfo { get; set; }
         public virtual DbSet<Reise> Reiser { get; set; }
