@@ -11,8 +11,7 @@ namespace WebApplication2.Models
     {
     
         public int id { get; set; }
-        public int reiseid { get; set; }
-        public int kundeid { get; set; }
+
      
     }
 

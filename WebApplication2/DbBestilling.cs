@@ -6,11 +6,14 @@ using WebApplication2.Models;
 
 namespace WebApplication2
 {
+    //Listeobjekter til bruk i databasen
     public class DbBestilling
     {
+        //bruk av dispose se DB.cs
         private DB db = new DB();
 
-        public List<destinasjoner> alleDestinasjoner()
+        //destinasjoner
+        public List<destinasjoner> AlleDestinasjoner()
         {
 
             {
@@ -24,6 +27,7 @@ namespace WebApplication2
                 return alleDestinasjoner;
             }
         }
+        //om det skulle trenges viser vi kunden her
             public List<kunde> alleBestillinger()
         {
              
@@ -41,6 +45,7 @@ namespace WebApplication2
           
                
         }
+        //til oppgave 2
         public int Innpris(int billettpris1, int billettpris2, int antall, int? antall_barn)
         {
             if (antall_barn > 0)
@@ -55,8 +60,10 @@ namespace WebApplication2
             }
             
         }
-        public bool Lagrebestilling(kunde innbestilling, reise innreise, int innpris1, int innpris2)
+        //lagrer hele bestillingen.
+        public bool Lagrebestilling(kunde innbestilling, reise innreise)
         {
+            
             //setter inn hele bestillingen, tar inn modellen kunde og reise
             //i form via ajax innpris1 er tatt fra destinasjon databasen og fremvises som en verdi på skjermen.
             try
@@ -72,7 +79,7 @@ namespace WebApplication2
                 nyReiseRad.Returtid = innreise.returtid;
                 nyReiseRad.Antall = innreise.antall;
                 nyReiseRad.Antallbarn = innreise.antallbarn;
-                nyReiseRad.Billettpris = Innpris(innpris1,innpris2,innreise.antall,innreise.antallbarn);
+                nyReiseRad.Billettpris = innreise.billettpris;
                 nyKundeRad.Fornavn = innbestilling.fornavn;
                 nyKundeRad.Etternavn = innbestilling.etternavn;
                 nyKundeRad.Kontaktinfo.Epost = innbestilling.epost;
