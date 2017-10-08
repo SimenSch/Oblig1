@@ -25,10 +25,15 @@ namespace WebApplication2.Controllers
         // GET: Home
         public ActionResult Index()
         {
-          var alleReiser = db.Reiser.ToList();
-            return View(alleReiser);
+            List<Destinasjoner> destinasjoner = db.Destinasjoner.ToList();
+            return View(destinasjoner);
         }
-        
+
+        public ActionResult Registrer()
+        {
+            return View();
+        }
+
         public string HentFlyplass()
         {
                 List<Destinasjoner> alleFly = db.Destinasjoner.ToList();
@@ -48,6 +53,39 @@ namespace WebApplication2.Controllers
                 return jsonSerializer.Serialize(alleFraFly);
             
         }
+        [HttpPost]
+        public string HentPris(string fraDest)
+        {
+
+            List<Destinasjoner> alleDest = db.Destinasjoner.ToList();
+            List<Destinasjoner> valgtDest = new List<Destinasjoner>();
+
+            valgtDest = alleDest.Where(alle => alle.Flyplass.Equals(fraDest)).ToList();
+
+            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+            string json = jsonSerializer.Serialize(valgtDest);
+            return json;
+            
+        }
+        /* public string HentPrisen()
+         {
+             List<Destinasjoner> alleFly = db.Destinasjoner.ToList();
+
+             var Prisen = new List<int>();
+
+             foreach (Destinasjoner d in alleFly)
+             {
+                 int funnetPris = Prisen.FirstOrDefault(fl => fl.Contains(d.Pris));
+                 if (funnetPris == null)
+                 {
+                     // ikke funnet strekning i listen, legg den inn i listen
+                     Prisen.Add(d.Pris);
+                 }
+             }
+             var jsonSerializer = new JavaScriptSerializer();
+             return jsonSerializer.Serialize(Prisen);
+
+         }*/
 
         /*
          */
@@ -55,8 +93,7 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Registrer(Kunde innKunde)
         {
-            
-            
+
                 try
                 {
                     db.alleBestillinger.Add(innKunde);
@@ -70,6 +107,7 @@ namespace WebApplication2.Controllers
                 return RedirectToAction("Liste");
             
         }
+
         public ActionResult Liste()
         {
         

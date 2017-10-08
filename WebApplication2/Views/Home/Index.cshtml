@@ -1,14 +1,19 @@
-﻿@{
+﻿@model List<WebApplication2.Models.Destinasjoner>
+
+
+
+@{
     ViewBag.Title = "Index";
 }
 <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
 <script type="text/javascript">
-
+  
 
     ////JQ
      $(function () {
 
-            // hent alle fraFlyplass, bygg opp dropdown1 når siden lastes
+            // hent alle Flyplassene, lag dropdown1 når siden lastes
 
             $.ajax({
                 url: '/Home/HentFlyplass',
@@ -22,58 +27,67 @@
                 }
             });
 
-            function VisDropDown1(fraListe) {
+        function VisDropDown1(fraListe) {
 
                 var utStreng = "<option value=''></option>";
                 for (var i in fraListe) {
-                    utStreng += "<option value='" + fraListe[i] + "'>" + fraListe[i] + "</option>";
-                }
+            utStreng += "<option value='" + fraListe[i] + "'>" + fraListe[i] + "</option>";
+        }
                 $("#from").empty().append(utStreng);
             }
 
-           // opprett en hendelse på dropdown-listen fraFlyplass når siden lastes      
-                $.ajax({
-                    url: '/Home/HentFlyplass',
+           // opprett en hendelse på dropdown-listen fraFlyplass når siden lastes
+            $.ajax({
+            url: '/Home/HentFlyplass',
                     type: 'GET',
                     dataType: 'json',
                     success: function (tilListe) {
-                        VisDropDown2(tilListe);
-                    },
+            VisDropDown2(tilListe);
+        },
                     error: function (x, y, z) {
-                        alert(x + '\n' + y + '\n' + z);
-                    }
+            alert(x + '\n' + y + '\n' + z);
+        }
                 });
             });
 
             function VisDropDown2(tilListe) {
                 var utStreng = "<option value=''></option>";
                 for (var i in tilListe) {
-                    utStreng += "<option value='" + tilListe[i] + "'>" + tilListe[i] + "</option>";
-                }
+            utStreng += "<option value='" + tilListe[i] + "'>" + tilListe[i] + "</option>";
+        }
                 $("#to").empty().append(utStreng);
-            }
-         
+    }
+
              // opprett en hendelse på dropdown-listen valgtFlyplass når siden lastes
-            $("#to").click(function () {
-                var valgtTilFlyplass = $(this).val();
-                var valgtFraFlyplass = $("#from").val();
+            function hentPris() {
                 $.ajax({
-                    url: '/Home/HentFlyplass',
-                    type: 'GET',
+                    url: '/Home/HentPris',
+                    type: 'POST',
                     dataType: 'json',
-                    success: function (strekninger) {
-                        VisStrekninger(strekninger);
+                    data: {
+                        fraDest: $("#from").val()
+                    },
+                    cache: false,
+                    success: function (hentetDest) {
+                        VisPris(hentetDest);
+                        alert(hentetdest);
                     },
                     error: function (x, y, z) {
                         alert(x + '\n' + y + '\n' + z);
-                    }
+                    },
                 });
-            });
+            }
+            function VisPris(hentetDest) {
+                    var utStreng = "";
 
+                    for (var i in hentetDest) {
+                        utStreng += "";
+                    }
 
-            
+                    $("#valgteDest").append(utStreng);
+                }
 
-
+   
 
     ////JavaScript
     var valKontrollTil = false;
@@ -151,7 +165,7 @@
 
         if (date > idag) {
             alert("Dato ikke gyldig!");
-            var dagenIdag = date.toISOString().slice(0, 10).replace(/-/g, "-");
+        var dagenIdag = date.toISOString().slice(0, 10).replace(/-/g, "-");
             document.getElementById("utreiseDato").value = dagenIdag;
         }
         inputUtreise.style.borderColor = "Green";
@@ -179,33 +193,42 @@
 
         if (date > idag || dagens < utreiseDato) {
             alert("Dato ikke gyldig!");
-            document.getElementById("hjemDato").value = utreiseDato;
+        document.getElementById("hjemDato").value = utreiseDato;
 
         }
-        
+
     }
     function valideringTil(til) {
         var input = document.getElementById("from");
         var val = document.getElementById("valideringFra");
         var ToInput = document.getElementById("to");
 
-        if (til == "Oslo" || til == "Trondheim" || til == "Bergen"
-            || til == "Stavanger" || til == "Tromsø" || til == "Torp") {
-            input.style.borderColor = "Green";
-            val.style.color = "Green";
-            val.innerHTML = "✓";
-            valKontrollFra = true;
+        if (til == ToInput.value) {
 
+            input.style.borderColor = "Red";
+        val.style.color = "Red";
+            val.innerHTML = "Vennligst velg noe annet enn " + ToInput.value;
+            valKontrollTil = false;
         }
 
-        
+        else if (til == "Oslo" || til == "Trondheim" || til == "Bergen"
+            || til == "Stavanger" || til == "Tromsø" || til == "Torp") {
+            input.style.borderColor = "Green";
+        val.style.color = "Green";
+            val.innerHTML = "✓";
+            valKontrollFra = true;
+        }
+
         else {
             document.getElementById("from").style.borderColor = "Red";
-            val.innerHTML = "Vennligst velg en av destinasjonene i listen";
+        val.innerHTML = "Vennligst velg en av destinasjonene i listen";
             val.style.color = "Red";
             valKontrollFra = false;
         }
 
+        var flyplasser = [];
+
+        //document.getElementById("test").innerHTML = pris;
     }
     function valideringFra(fra) {
         var input = document.getElementById("to");
@@ -215,22 +238,22 @@
         if (fra == fromInput.value) {
             document.getElementById("to").style.borderColor = "Red";
 
-            val.innerHTML = "Vennligst velg noe annet enn " + fra;
+        val.innerHTML = "Vennligst velg noe annet enn " + fra;
             val.style.color = "Red";
             valKontrollTil = false;
-        } 
+        }
         else if (fra == "Oslo" || fra == "Trondheim" || fra == "Bergen"
             || fra == "Stavanger" || fra == "Tromsø" || fra == "Torp") {
             input.style.borderColor = "Green";
-            val.style.color = "Green";
+        val.style.color = "Green";
             val.innerHTML = "✓";
             valKontrollTil = true;
         }
-        
+
         else {
             document.getElementById("to").style.borderColor = "Red";
 
-            val.innerHTML = "Vennligst velg en av destinasjonene i listen";
+        val.innerHTML = "Vennligst velg en av destinasjonene i listen";
             val.style.color = "Red";
             valKontrollTil = false;
         }
@@ -253,24 +276,36 @@
             document.getElementById("3").innerHTML = utReise;
             if (skjult == true)
             {
-                document.getElementById("4").innerHTML = "Ingen Hjemreise"
-            }
-            else
+            document.getElementById("4").innerHTML = "Ingen Hjemreise"
+        }
+        else
             {
-                document.getElementById("4").innerHTML = hjemReise;
-            }
+            document.getElementById("4").innerHTML = hjemReise;
+        }
             document.getElementById("5").innerHTML = parseInt(antallVoksne) + parseInt(antallBarn);
-            document.getElementById("6").innerHTML = (1000 * parseInt(antallVoksne)) + (500 * parseInt(antallBarn));
-
-
+            document.getElementById("6").innerHTML = (999 * parseInt(antallVoksne)) + (499 * parseInt(antallBarn)) + ",-";
+            //
+            document.getElementById("varsel").innerHTML = "";
+            document.getElementById("11").innerHTML = fra;
+            document.getElementById("12").innerHTML = til;
+            document.getElementById("13").innerHTML = utReise;
+            if (skjult == true) {
+            document.getElementById("14").innerHTML = "Ingen Hjemreise"
+        }
+        else {
+            document.getElementById("14").innerHTML = hjemReise;
+        }
+            document.getElementById("15").innerHTML = parseInt(antallVoksne) + parseInt(antallBarn);
+            document.getElementById("16").innerHTML = (699 * parseInt(antallVoksne)) + (399 * parseInt(antallBarn)) + ",-";
+            //
             document.getElementById("flyReiser").style.display = 'block';
         }
 
         if (valKontrollFra == false || valKontrollTil == false) {
             document.getElementById("varsel").innerHTML = "Obligatoriske feltet for destinasjon mangler! ";
-            document.getElementById("varsel").style.color = "red";
+        document.getElementById("varsel").style.color = "red";
         }
-   
+
         if (valDatoTil == false || valDatoFra == false ) {
             document.getElementById("varsel").innerHTML = "Obligatoriske felt for ' Dato' mangler! ";
             document.getElementById("varsel").style.color = "red";
@@ -280,14 +315,12 @@
 
         
 
-        
-
-
     }
 
 </script>
+
 <p2></p2>
-<h2>Bestill Flybilletter</h2>
+<h2 id="test"></h2>
 
 @using (Html.BeginForm())
 {
@@ -300,7 +333,7 @@
         <div class="form-group">
             <h4 class="control-label col-md-2">Fra</h4>
             <div class="col-md-3">
-                <select id="from" class="form-control" onchange="valideringTil(this.value)">
+                <select id="from" class="form-control" onchange="valideringTil(this.value); hentPris();" >
                     <!--<option value=""></option>
                     <option value="Trondheim">Trondheim</option>
                     <option value="Oslo">Oslo</option>
@@ -308,7 +341,6 @@
                     <option value="Stavanger">Stavanger</option>
                     <option value="Tromsø">Tromsø</option>-->
                 </select>
-              <!--  <input id="from" type="text" name="fraDest" class="form-control" onchange="valideringTil(this.value)" />   -->
             </div>
             <h5 id="valideringFra"></h5>
         </div>
@@ -316,14 +348,13 @@
             <h4 class="control-label col-md-2">Til</h4>
             <div class="col-md-3">  
                 <select id="to" class="form-control" onchange="valideringFra(this.value)">
-                    <option value=""></option>
+                 <!--  <option value=""></option>
                     <option value="Trondheim">Trondheim</option>
                     <option value="Oslo">Oslo</option>
                     <option value="Bergen">Bergen</option>
                     <option value="Stavanger">Stavanger</option>
-                    <option value="Tromsø">Tromsø</option>
+                    <option value="Tromsø">Tromsø</option> -->
                 </select>
-                <!-- <input id ="to" type="text" name="fraDest" class="form-control" onchange="valideringFra(this.value)" />-->
             </div>
             <h5 id="valideringTil"></h5>
         </div>
@@ -410,7 +441,7 @@
         </div>
     </div>
 }
-    
+   
 
 
 <div id="flyReiser" class="container" style="display:none">
@@ -423,6 +454,7 @@
                     <th>Til</th>
                     <th>Utreise</th>
                     <th>Hjemreise</th>
+                    <th>Klokkeslett</th>
                     <th>Antall person</th>
                     <th>Pris</th>
 
@@ -431,24 +463,26 @@
             
             <tbody>
                 <tr>
-                    <td id="1">Oslo</td>
-                    <td id="2">Bergen</td>
-                    <td id="3">10.10.17</td>
-                    <td id="4">17.10.17</td>
-                    <td id="5">2</td>
-                    <td id="6">2000.kr</td>
-                    <td><button class="btn-success">Kjøp</button></td>
+                    <td id="1"></td>
+                    <td id="2"></td>
+                    <td id="3"></td>
+                    <td id="4"></td>
+                    <td id="7">14:00</td>
+                    <td id="5"></td>
+                    <td id="6"></td>
+                    <td><button id ="knapp1" class="btn-success" onclick="sendVidere1()">Kjøp</button></td>
                 </tr>
             </tbody>
             <tbody>
                 <tr>
-                    <td>Oslo</td>
-                    <td>Trondheim</td>
-                    <td>10.10.17</td>
-                    <td>17.10.17</td>
-                    <td>2</td>
-                    <td>2500.kr</td>
-                    <td><button class="btn-success">Kjøp</button></td>
+                    <td id="11"></td>
+                    <td id="12"></td>
+                    <td id="13"></td>
+                    <td id="14"></td>
+                    <td id="17">20:30</td>
+                    <td id="15"></td>
+                    <td id="16"></td>
+                    <td><button id ="knapp2" class="btn-success" >Kjøp</button></td>
                 </tr>
             </tbody>
         </table>
@@ -457,3 +491,6 @@
         <div>
             @Html.ActionLink("Til Register ", "Registrer")
         </div>
+
+
+
