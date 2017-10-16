@@ -1,16 +1,42 @@
-﻿@model WebApplication2.Models.Kunde
+﻿@model WebApplication2.Models.kunde
 
 @{
     ViewBag.Title = "Registrer";
 }
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+   
 
+    // bygg et js objekt fra input feltene
+    $("#registrer").click(function () {
+        var jsInn = {
+            fornavn: $("#Fornavn").val(),
+            etternavn: $("#Etternavn").val(),
+            postnr: $("#epost").val(),
+            poststed: $("#telefon").val()
+        }
+        $.ajax({
+            url: '/home/Lagrekunde',
+            type: 'POST',
+            data: JSON.stringify(jsInn),
+            contentType: "application/json;charset=utf-8",
+            success: function (ok) {
+                // kunne ha feilhåndtert evt. feil i registreringen her
+                window.location.reload();
+                // reload av vinduet må sje her altså etter at kallet har returnert
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });</script>
 <div class="jumbotron">
     <h2>Cryanair booking</h2>
     <p class="lead">Våre fly har kun first class. Litt dyrere, for reisens skyld</p>
+    </div>
 
-</div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(/* denne fungerer ikke "lagreKunde", "Home"*/))
 {
     @Html.AntiForgeryToken()
 
@@ -19,37 +45,23 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Fornavn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fornavn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Fornavn, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.fornavn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" >
+                @Html.EditorFor(model => model.fornavn, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fornavn, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Etternavn, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.etternavn, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Etternavn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Etternavn, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.etternavn, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.etternavn, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Kontaktinfo.Telefon, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Kontaktinfo.Telefon, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Kontaktinfo.Telefon, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Kontaktinfo.Epost, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Kontaktinfo.Epost, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Kontaktinfo.Epost, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+      
+      
 
 
         <div class="form-group">

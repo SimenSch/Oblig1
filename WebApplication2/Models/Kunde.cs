@@ -13,11 +13,7 @@ namespace WebApplication2.Models
 
         public string etternavn { get; set; }
 
-        public int telefon { get; set; }
-
-        public string epost { get; set; }
-
-        public string kontaktinfoid;
+     
         
     }
 }

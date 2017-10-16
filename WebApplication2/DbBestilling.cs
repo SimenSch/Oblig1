@@ -19,38 +19,38 @@ namespace WebApplication2
             {
                 List<destinasjoner> alleDestinasjoner = db.Destinasjoner.Select(d => new destinasjoner
                 {
-                   id = d.Id,
-                   flyplass = d.Flyplass,
-                   pris = d.Pris
-                    
+                    id = d.Id,
+                    flyplass = d.Flyplass,
+                    pris = d.Pris
+
                 }).ToList();
                 return alleDestinasjoner;
             }
         }
         //om det skulle trenges viser vi kunden her
-            public List<kunde> alleBestillinger()
+        public List<kunde> alleBestillinger()
         {
-             
+
             {
                 List<kunde> alleKunder = db.alleBestillinger.Select(k => new kunde
                 {
                     id = k.Id,
                     fornavn = k.Fornavn,
                     etternavn = k.Etternavn,
-                    epost = k.Kontaktinfo.Epost,
-                    telefon = k.Kontaktinfo.Telefon
+                    
+                   
                 }).ToList();
                 return alleKunder;
             }
-          
-               
+
+
         }
-        //til oppgave 2
+        //experimentell Priskalkulering kommer i oppgave 2
         public int Innpris(int billettpris1, int billettpris2, int antall, int? antall_barn)
         {
             if (antall_barn > 0)
             {
-                var billettpris = (billettpris1 + billettpris2 * antall) + (billettpris1 + billettpris2 *  (int)antall_barn / 2);
+                var billettpris = (billettpris1 + billettpris2 * antall) + (billettpris1 + billettpris2 * (int)antall_barn / 2);
                 return billettpris;
             }
             else
@@ -58,33 +58,21 @@ namespace WebApplication2
                 var billettpris = (billettpris1 + billettpris2 * antall);
                 return billettpris;
             }
-            
+
         }
-        //lagrer hele bestillingen.
-        public bool Lagrebestilling(kunde innbestilling, reise innreise)
+        //lagrer kunden
+        public bool Lagrekunde(kunde innKunde)
         {
-            
+
             //setter inn hele bestillingen, tar inn modellen kunde og reise
-            //i form via ajax innpris1 er tatt fra destinasjon databasen og fremvises som en verdi på skjermen.
+
             try
             {
                 var nyKundeRad = new Kunde();
-                var nyBestillingsRad = new Bestilling();
-                var nyReiseRad = new Reise();
-                var nyDestinasjon = new Destinasjoner();              
-     
-                nyReiseRad.Hjemreise = innreise.hjemreise;
-                nyReiseRad.Utreise = innreise.utreise;
-                nyReiseRad.Turtid = innreise.turtid;
-                nyReiseRad.Returtid = innreise.returtid;
-                nyReiseRad.Antall = innreise.antall;
-                nyReiseRad.Antallbarn = innreise.antallbarn;
-                nyReiseRad.Billettpris = innreise.billettpris;
-                nyKundeRad.Fornavn = innbestilling.fornavn;
-                nyKundeRad.Etternavn = innbestilling.etternavn;
-                nyKundeRad.Kontaktinfo.Epost = innbestilling.epost;
-                nyKundeRad.Kontaktinfo.Telefon = innbestilling.telefon;
-                /*
+                nyKundeRad.Fornavn = innKunde.fornavn;
+                nyKundeRad.Etternavn = innKunde.etternavn;
+              
+                /* til senere oppgave
                if (sjekkEpost == null)
                 {
                     var Kontaktinforad = new Kontaktinfo();
@@ -93,10 +81,8 @@ namespace WebApplication2
 
                 }*/
                 db.alleBestillinger.Add(nyKundeRad);
-                db.Reiser.Add(nyReiseRad);
-                db.Bestillinger.Add(nyBestillingsRad);                         
                 db.SaveChanges();
-                
+
                 return true;
             }
             catch (Exception feil)
@@ -104,6 +90,29 @@ namespace WebApplication2
                 return false;
             }
         }
+        // lagrer hele reisen
+        public bool LagreReise(reise innreise)
+        {
+            var nyReiseRad = new Reise();
+            nyReiseRad.Hjemreise = innreise.hjemreise;
+            nyReiseRad.Utreise = innreise.utreise;
+            nyReiseRad.Turtid = innreise.turtid;
+            nyReiseRad.Returtid = innreise.returtid;
+            nyReiseRad.Antall = innreise.antall;
+            nyReiseRad.Antallbarn = innreise.antallbarn;
+            nyReiseRad.Billettpris = innreise.billettpris;
+
+
+
+            db.Reiser.Add(nyReiseRad);
+
+            db.SaveChanges();
+
+            return true;
+        
+            
+         }
+
          
     }
 }

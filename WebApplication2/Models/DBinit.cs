@@ -17,11 +17,7 @@ namespace WebApplication2.Models
                 
 
             };
-            var nyKontaktInfo = new Kontaktinfo
-            {
-                Telefon = 33445569,
-                Epost = "tremanntoma@bajseflass.cem"
-            };
+         
             var nyReise = new Reise
             {
             Utreise = "",

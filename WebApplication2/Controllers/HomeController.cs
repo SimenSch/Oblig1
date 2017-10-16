@@ -14,7 +14,7 @@ namespace WebApplication2.Controllers
     public class HomeController : Controller
     {
         private DB db = new DB();
-       
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -23,6 +23,18 @@ namespace WebApplication2.Controllers
             }
             base.Dispose(disposing);
         }
+        /* Disse fungerer desverre ikke
+        public ActionResult lagreKunde()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult lagreKunde(kunde innkunde)
+        {
+            var db = new DbBestilling();
+            bool ok = db.Lagrekunde(innkunde);
+            return View();
+        }*/
         // GET: Home
         public ActionResult Index()
         {
@@ -30,15 +42,6 @@ namespace WebApplication2.Controllers
             return View(destinasjoner);
         }
 
-        //legger inn hele bestillingen
-        [HttpPost]
-        public string Registrer(kunde innKunde, reise innReise)
-        {
-            var db = new DbBestilling();
-            db.Lagrebestilling(innKunde,innReise);
-            var jsonSerializer = new JavaScriptSerializer();
-            return jsonSerializer.Serialize("OK");
-        }
         public ActionResult Registrer()
         {
             return View();
@@ -66,7 +69,7 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public string HentPris(string fraDest)
         {
-            
+
             List<Destinasjoner> alleDest = db.Destinasjoner.ToList();
             List<Destinasjoner> valgtDest = new List<Destinasjoner>();
 
@@ -77,6 +80,8 @@ namespace WebApplication2.Controllers
             return json;
             
         }
+       
+        
         /* public string HentPrisen()
          {
              List<Destinasjoner> alleFly = db.Destinasjoner.ToList();
@@ -101,9 +106,22 @@ namespace WebApplication2.Controllers
          */
 
         [HttpPost]
-        
+        public ActionResult Registrer(Kunde innKunde)
+        {
+
+                try
+                {
+                    db.alleBestillinger.Add(innKunde);
+                    db.SaveChanges();
+                }
+                catch (Exception feil)
+                {
+                    return View("Noe gikk feil med registeringen av din reise prøv igjen");
+
+                }
+                return RedirectToAction("Liste");
             
-        
+        }
 
         public ActionResult Liste()
         {
@@ -132,7 +150,7 @@ namespace WebApplication2.Controllers
             return View();
             
         }
-       /* public ActionResult Slett(int Id)
+        public ActionResult Slett(int Id)
         {
             using (var db = new DB())
             {
@@ -147,7 +165,7 @@ namespace WebApplication2.Controllers
                     // her bør det komme noe mer
                 }
             }
-            return 
-        }*/
+            return RedirectToAction("Liste");
+        }
     }
 }

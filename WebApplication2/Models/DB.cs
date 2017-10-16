@@ -12,7 +12,7 @@ namespace WebApplication2.Models
         public int Id { get; set; }
         public string Fornavn { get; set; }
         public string Etternavn { get; set; }
-        public virtual Kontaktinfo Kontaktinfo { get;set;}
+        
 
         public virtual List<Bestilling> Bestilling { get; set; }
         
@@ -26,14 +26,7 @@ namespace WebApplication2.Models
 
         public virtual Reise Reise { get; set; }
     }
-    public class Kontaktinfo
-    {   
-        public int Id { get; set; }
-        public int Telefon { get; set; }
-        public string Epost { get; set; }
-        public virtual List<Kunde> Kunde {get;set;}
-
-    }
+   
     public class Reise
     {
         public int Id { get; set; }
@@ -75,7 +68,7 @@ namespace WebApplication2.Models
         }
         
         public virtual DbSet<Kunde> alleBestillinger { get; set; }
-        public virtual DbSet<Kontaktinfo> Kontaktinfo { get; set; }
+      
         public virtual DbSet<Reise> Reiser { get; set; }
         public virtual DbSet<Destinasjoner> Destinasjoner { get; set; }
 

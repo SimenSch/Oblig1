@@ -2,6 +2,7 @@
 
 
 
+
 @{
     ViewBag.Title = "Index";
 }
@@ -11,14 +12,16 @@
   
 
     ////JQ
-    $("#registrer").click(function () {
+   /* $("#registrer").click(function () {
 
         // bygg et js objekt fra input feltene
         var jsInn = {
-            fornavn: $("#Fornavn").val(),
-            etternavn: $("#Etternavn").val(),
-            postnr: $("#epost").val(),
-            poststed: $("#telefon").val()
+            hjemreise: $("#hjemreise").val(),
+            utreise: $("#utreise").val(),
+            turtid: $("#turtid").val(),
+            returtid: $("#returtid").val(),
+            antall: $("#antall").val(),
+            $("#returtid").val()
         }
     $.ajax({
         url: '/Kunde/Register',
@@ -33,7 +36,7 @@
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
         }
-    });
+    });*/
      $(function () {
 
             // hent alle Flyplassene, lag dropdown1 når siden lastes
@@ -345,7 +348,7 @@
 <p2></p2>
 <h2 id="test"></h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("lagreReise", "Home"))
 {
     @Html.AntiForgeryToken()
 
@@ -448,7 +451,7 @@
                 Barn(0-13):
             </h4>
             <div class="col-md-1">
-                <input id="barn" type="number" name="Antall" class="form-control" value="0" readonly />
+                <input id="barn" type="number" name="antall_barn" class="form-control" value="0" readonly />
             </div>
             <input type="button" class="btn-danger" onclick="barnMinus()" value="-" />
             <input type="button" class="btn-success" onclick="barnPluss()" value="+" />
