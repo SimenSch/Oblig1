@@ -122,7 +122,36 @@ namespace WebApplication2.Controllers
                 return RedirectToAction("Liste");
             
         }
-
+        public ActionResult BrukerRegisstrering()
+        {
+            return View();
+        }
+        //tor sin kode for å registrere Hashet passord med bruker
+        [HttpPost]
+        public ActionResult BrukerRegisstrering(bruker innBruker)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+           
+            
+                try
+                {
+                    var nyBruker = new dbBruker();
+                    byte[] passordDb = Funksjoner.lagHash(innBruker.passord);
+                    nyBruker.Passord = passordDb;
+                    nyBruker.BrukerId = innBruker.brukerId;
+                    db.Brukere.Add(nyBruker);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception feil)
+                {
+                    return View();
+                }
+            
+        }
         public ActionResult Liste()
         {
         

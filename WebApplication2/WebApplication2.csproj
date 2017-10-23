@@ -131,6 +131,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\bestilling.cs" />
+    <Compile Include="Models\bruker.cs" />
     <Compile Include="Models\destinasjoner.cs" />
     <Compile Include="Models\DBinit.cs" />
     <Compile Include="Models\reise.cs" />
@@ -148,6 +149,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Registrer.cshtml" />
+    <Content Include="Views\Home\BrukerRegisstrering.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

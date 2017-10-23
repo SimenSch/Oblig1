@@ -8,6 +8,7 @@ namespace WebApplication2.Models
 { 
     public class DBinit : DropCreateDatabaseAlways<DB>
     {
+
 	    protected override void Seed(DB context)
 	    {
             var nyKunde = new Kunde
@@ -17,7 +18,24 @@ namespace WebApplication2.Models
                 
 
             };
-         
+            
+            
+           
+            var nyBruker1 = new dbBruker
+            {
+                BrukerId = "Tormann",
+                Passord = Funksjoner.lagHash("TorErKjempeKul123")
+            };
+            var nyBruker2 = new dbBruker
+            {
+                BrukerId = "Devranmann",
+                Passord = Funksjoner.lagHash("DevranErKjempeKul123")
+            };
+            var nyBruker3 = new dbBruker
+            {
+                BrukerId = "Simenmann",
+                Passord = Funksjoner.lagHash("SimenErKjempeKul123")
+            };
             var nyReise = new Reise
             {
             Utreise = "",
@@ -31,7 +49,7 @@ namespace WebApplication2.Models
             Billettpris = 0,
 
             };;
-            
+
             var nyDestinasjon1 = new Destinasjoner
             {
                 Flyplass = "Oslo",
@@ -69,7 +87,9 @@ namespace WebApplication2.Models
             context.Destinasjoner.Add(nyDestinasjon4);
             context.Destinasjoner.Add(nyDestinasjon5);
             context.Destinasjoner.Add(nyDestinasjon6);
-            
+            context.Brukere.Add(nyBruker1);
+            context.Brukere.Add(nyBruker2);
+            context.Brukere.Add(nyBruker3);
             base.Seed(context);
            
                
