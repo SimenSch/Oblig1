@@ -13,7 +13,7 @@ namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
-        private DB db = new DB();
+        public DB db = new DB();
 
         protected override void Dispose(bool disposing)
         {
@@ -41,7 +41,49 @@ namespace WebApplication2.Controllers
             List<Destinasjoner> destinasjoner = db.Destinasjoner.ToList();
             return View(destinasjoner);
         }
+        
+        //tor sin kode for innlogging ViewBag.Innlogget brukes i Innlogging for å sjekke om vi er innlogget eller ikke. se Innlogging.cshtml linje 40
+        public ActionResult Innlogging()
+        {
+            if (Session["LoggetInn"] == null)
+            {
+                Session["LoggetInn"] = false;
+                ViewBag.Innlogget = false;
+            }
+            else
+            {
+                ViewBag.Innlogget = (bool)Session["LoggetInn"];
+            }
 
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Innlogging(bruker innBruker)
+        {
+            if (Funksjoner.BrukerInnloggingsjekk_i_DB(innBruker))
+            {
+                Session["LoggetInn"] = true;
+                ViewBag.Innlogget = true;
+                return View();
+            }
+            else
+            {
+                Session["LoggetInn"] = false;
+                ViewBag.Innlogget = false;
+                return View();
+            }
+        }        // tors Innloggingskode        public ActionResult InnLoggetSide()
+        {
+            if (Session["LoggetInn"] != null)
+            {
+                bool loggetInn = (bool)Session["LoggetInn"];
+                if (loggetInn)
+                {
+                    return View();
+                }
+            }
+            return RedirectToAction("Index");
+        }
         public ActionResult Registrer()
         {
             return View();

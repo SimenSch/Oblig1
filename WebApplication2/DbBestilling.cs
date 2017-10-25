@@ -27,8 +27,9 @@ namespace WebApplication2
                 return alleDestinasjoner;
             }
         }
-        //om det skulle trenges viser vi kunden her
-        public List<kunde> alleBestillinger()
+       
+            //om det skulle trenges viser vi kunden her
+            public List<kunde> alleBestillinger()
         {
 
             {

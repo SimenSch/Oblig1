@@ -1,0 +1,57 @@
+﻿@model WebApplication2.Models.bruker
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Logg inn</legend>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.brukerId)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.brukerId)
+                @Html.ValidationMessageFor(model => model.brukerId)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.passord)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.passord)
+                @Html.ValidationMessageFor(model => model.passord)
+            </div>
+
+            <p>
+                <input type="submit" value="Logg inn" />
+            </p>
+            @if (ViewBag.Innlogget)
+            {
+                <p style="color:blue">Logget inn</p>
+            }
+            else
+            {
+                <p style="color:red">Ikke logget inn</p>
+            }
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index") <br />
+        @Html.ActionLink("Registrer bruker", "BrukerRegisstrering") <br />
+        @Html.ActionLink("Innlogget side", "InnLoggetSide") <br />
+    </div>
+</body>
+</html>

@@ -48,9 +48,10 @@ namespace WebApplication2.Models
 
         public virtual List<Bestilling> Bestilling { get; set; }
     }
-    //tor sin kode for Hashkryptering SKAL FLYTTES TIL DLL senere
+    //SKAL FLYTTES TIL DLL senere
     public class Funksjoner
     {
+       //tor sin kode
         public static Byte[] lagHash(string innPassord)
         {
             byte[] innData, utData;
@@ -58,6 +59,26 @@ namespace WebApplication2.Models
             innData = System.Text.Encoding.ASCII.GetBytes(innPassord);
             utData = algoritme.ComputeHash(innData);
             return utData;
+        }
+        //tor sin kode. Dette vil sendes til homekontroller og brukes i en sjekk for å finne ut om brukeren er i systemet (da må passord også være korrekt. en modifisert versjon av denne skal også brukes til å håndtere opptatte brukernavn i databasen (kun dbBruker funnetBruker = db.Brukere.FirstOrDefault. 
+
+        public static bool BrukerInnloggingsjekk_i_DB(bruker innBruker)
+        {
+            using (var db = new DB())
+            {
+                byte[] passordDb = lagHash(innBruker.passord);
+                dbBruker funnetBruker = db.Brukere.FirstOrDefault
+                (b => b.Passord == passordDb && b.BrukerId == innBruker.brukerId);
+                if (funnetBruker == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
         }
     }
     public class Destinasjoner
