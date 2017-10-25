@@ -5,8 +5,9 @@ using System.Web;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.ComponentModel.DataAnnotations;
-using WebApplication2.Controllers;
-namespace WebApplication2.Models
+
+
+namespace WebApplication2.DAL
 {
     public class Kunde
     {
@@ -48,7 +49,7 @@ namespace WebApplication2.Models
 
         public virtual List<Bestilling> Bestilling { get; set; }
     }
-    //SKAL FLYTTES TIL DLL senere
+    //SKAL FLYTTES TIL DAL senere
     public class Funksjoner
     {
        //tor sin kode
@@ -62,7 +63,7 @@ namespace WebApplication2.Models
         }
         //tor sin kode. Dette vil sendes til homekontroller og brukes i en sjekk for å finne ut om brukeren er i systemet (da må passord også være korrekt. en modifisert versjon av denne skal også brukes til å håndtere opptatte brukernavn i databasen (kun dbBruker funnetBruker = db.Brukere.FirstOrDefault. 
 
-        public static bool BrukerInnloggingsjekk_i_DB(bruker innBruker)
+        public static bool BrukerInnloggingsjekk_i_DB(Model.bruker innBruker)
         {
             using (var db = new DB())
             {

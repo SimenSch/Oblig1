@@ -4,11 +4,12 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace WebApplication2.Models
+
+namespace WebApplication2.DAL
 { 
     public class DBinit : DropCreateDatabaseAlways<DB>
     {
-
+        
 	    protected override void Seed(DB context)
 	    {
             var nyKunde = new Kunde

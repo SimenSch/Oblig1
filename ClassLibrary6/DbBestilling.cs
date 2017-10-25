@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WebApplication2.Models;
+using WebApplication2.Model;
 
-namespace WebApplication2
+namespace WebApplication2.DAL
 {
     //Listeobjekter til bruk i databasen
     public class DbBestilling
@@ -61,6 +61,37 @@ namespace WebApplication2
             }
 
         }
+        
+        //tor sin kode
+        public static Byte[] lagHash(string innPassord)
+        {
+            byte[] innData, utData;
+            var algoritme = System.Security.Cryptography.SHA256.Create();
+            innData = System.Text.Encoding.ASCII.GetBytes(innPassord);
+            utData = algoritme.ComputeHash(innData);
+            return utData;
+        }
+        //tor sin kode. Dette vil sendes til homekontroller og brukes i en sjekk for å finne ut om brukeren er i systemet (da må passord også være korrekt. en modifisert versjon av denne skal også brukes til å håndtere opptatte brukernavn i databasen (kun dbBruker funnetBruker = db.Brukere.FirstOrDefault. 
+
+        public static bool BrukerInnloggingsjekk_i_DB(bruker innBruker)
+        {
+            using (var db = new DB())
+            {
+                byte[] passordDb = lagHash(innBruker.passord);
+                dbBruker funnetBruker = db.Brukere.FirstOrDefault
+                (b => b.Passord == passordDb && b.BrukerId == innBruker.brukerId);
+                if (funnetBruker == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+         }
+        
         //lagrer kunden
         public bool Lagrekunde(kunde innKunde)
         {

@@ -126,17 +126,9 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DbBestilling.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\bestilling.cs" />
-    <Compile Include="Models\bruker.cs" />
-    <Compile Include="Models\destinasjoner.cs" />
-    <Compile Include="Models\DBinit.cs" />
-    <Compile Include="Models\reise.cs" />
-    <Compile Include="Models\kunde.cs" />
-    <Compile Include="Models\DB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -159,7 +151,23 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary4\BLL.csproj">
+      <Project>{374b5725-bbc9-41af-bf1a-63630607f249}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClassLibrary5\Model.csproj">
+      <Project>{124dd339-d6bf-430b-858a-5b63c3f8bd3c}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClassLibrary6\DAL.csproj">
+      <Project>{C2370C25-EC84-4FD2-897A-774DB59ACD27}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

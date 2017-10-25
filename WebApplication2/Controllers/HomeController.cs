@@ -5,14 +5,16 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using WebApplication2.Models;
+using WebApplication2.Model;
 using System.Web.Script.Serialization;
-
+using WebApplication2.DAL;
+using WebApplication2.BLL;
 
 namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
+        
         public DB db = new DB();
 
         protected override void Dispose(bool disposing)
@@ -72,7 +74,9 @@ namespace WebApplication2.Controllers
                 ViewBag.Innlogget = false;
                 return View();
             }
-        }        // tors Innloggingskode        public ActionResult InnLoggetSide()
+        }
+        // tors Innloggingskode
+        public ActionResult InnLoggetSide()
         {
             if (Session["LoggetInn"] != null)
             {
@@ -82,7 +86,8 @@ namespace WebApplication2.Controllers
                     return View();
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index");
+
         }
         public ActionResult Registrer()
         {
