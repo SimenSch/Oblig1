@@ -15,41 +15,53 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
 
-        <fieldset>
-            <legend>Logg inn</legend>
+        
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.brukerId)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.brukerId)
-                @Html.ValidationMessageFor(model => model.brukerId)
-            </div>
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.passord)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.passord)
-                @Html.ValidationMessageFor(model => model.passord)
-            </div>
+            <fieldset>
 
-            <p>
-                <input type="submit" value="Logg inn" />
-            </p>
-            @if (ViewBag.Innlogget)
-            {
-                <p style="color:blue">Logget inn</p>
-            }
-            else
-            {
-                <p style="color:red">Ikke logget inn</p>
-            }
-        </fieldset>
+                @if (ViewBag.Innlogget)
+                {
+                    <h5 style="color:blue"><strong>Logget inn</strong></h5>
+                }
+                else
+                {
+                    <h5 style="color:red"><strong>Ikke logget inn</strong></h5>
+                
+                }
+                <legend>Logg inn</legend>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.brukerId)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.brukerId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.brukerId)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.passord)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.passord, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.passord)
+                </div>
+
+                <p>
+                    <br />
+                    <a href="/Home/index">
+                        <input type="button" value="Tilbake til bestilling av flybilletter" class="btn-danger" />
+                    </a>
+                    <input type="submit" value="Logg inn" class="btn-success" />
+
+                </p>
+
+            </fieldset>
+
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Index") <br />
+        @Html.ActionLink("Hjemmeside", "Index") <br />
         @Html.ActionLink("Registrer bruker", "BrukerRegisstrering") <br />
         @Html.ActionLink("Innlogget side", "InnLoggetSide") <br />
     </div>

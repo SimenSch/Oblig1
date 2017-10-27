@@ -385,21 +385,7 @@
             <h5 id="valideringTil"></h5>
         </div>
 
-        @*
-            <div class="form-group">
-                @Html.LabelFor(model => rute.fra, htmlAttributes: new { @class = "control-label col-md-2" })
-              <div class="col-md-10">
-                @Html.EditorFor(model => rute.fra, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => rute.fra, "", new { @class = "text-danger" })
-              </div>
-
-                <div class="form-group">
-                @Html.LabelFor(model => rute.til, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => rute.til, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => rute.til, "", new { @class = "text-danger" })
-                </div>
-        *@
+       
         <div class="form-group">
             <div class="control-label col-md-2">
                 <h4>
@@ -516,6 +502,10 @@
 </div>
         <div>
             @Html.ActionLink("Til Register ", "Registrer")
+            <br/>
+            @Html.ActionLink("Til Inlogging ", "Innlogging")
+            <br />
+            @Html.ActionLink("Til Bruker Regisstrering ", "BrukerRegisstrering")
         </div>
 
 
