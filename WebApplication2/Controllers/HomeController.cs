@@ -234,11 +234,7 @@ namespace WebApplication2.Controllers
             return View();
             
         }
-        public ActionResult reise()
-        {
-            var db = new DbBestilling
-            
-        }
+        
         public ActionResult Slett(int Id)
         {
             using (var db = new DB())

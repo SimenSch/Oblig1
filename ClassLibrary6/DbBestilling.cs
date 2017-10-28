@@ -10,12 +10,12 @@ namespace WebApplication2.DAL
     //Listeobjekter til bruk i databasen
     public class DbBestilling
     {
-        
-        
-        
+
+
+
         //destinasjoner
         public List<destinasjoner> AlleDestinasjoner()
-        {         
+        {
             var db = new DB();
             List<destinasjoner> alleDestinasjoner = db.Destinasjoner.Select(d => new destinasjoner()
             {
@@ -24,7 +24,7 @@ namespace WebApplication2.DAL
                 pris = d.Pris
 
             }).ToList();
-            return alleDestinasjoner;   
+            return alleDestinasjoner;
         }
         public List<reise> AlleReiser()
         {
@@ -52,11 +52,11 @@ namespace WebApplication2.DAL
                 id = k.Id,
                 fornavn = k.Fornavn,
                 etternavn = k.Etternavn,
-                    
-                   
+
+
             }).ToList();
             return alleKunder;
-            
+
 
 
         }
@@ -75,7 +75,7 @@ namespace WebApplication2.DAL
             }
 
         }
-        
+
         //tor sin kode
         public static Byte[] lagHash(string innPassord)
         {
@@ -86,17 +86,17 @@ namespace WebApplication2.DAL
             return utData;
         }
         public static bool BrukerRegisteringSjekk_i_DB(string innBruker)
-        { 
-             using (var db = new DB())
+        {
+            using (var db = new DB())
             {
-             
-              dbBruker funnetBruker = db.Brukere.FirstOrDefault
-            (b => b.BrukerId == innBruker);
-                if (funnetBruker !=null)
+
+                dbBruker funnetBruker = db.Brukere.FirstOrDefault
+              (b => b.BrukerId == innBruker);
+                if (funnetBruker != null)
                 {
                     return false;
                 }
-                else if(funnetBruker == null)
+                else if (funnetBruker == null)
                 {
                     return true;
                 }
@@ -106,7 +106,7 @@ namespace WebApplication2.DAL
                 }
 
             }
-         }
+        }
         //tor sin kode. Dette vil sendes til homekontroller og brukes i en sjekk for å finne ut om brukeren er i systemet (da må passord også være korrekt. en modifisert versjon av denne skal også brukes til å håndtere opptatte brukernavn i databasen (kun dbBruker funnetBruker = db.Brukere.FirstOrDefault. 
 
         public static bool BrukerInnloggingsjekk_i_DB(bruker innBruker)
@@ -126,22 +126,23 @@ namespace WebApplication2.DAL
                 }
 
             }
-         }
-        
+        }
+
         //lagrer kunden
         public bool Lagrekunde(kunde innKunde)
         {
 
             //setter inn hele bestillingen, tar inn modellen kunde og reise
 
-            try { 
+            try
+            {
 
 
                 var db = new DB();
                 var nyKundeRad = new Kunde();
                 nyKundeRad.Fornavn = innKunde.fornavn;
                 nyKundeRad.Etternavn = innKunde.etternavn;
-              
+
                 /* til senere oppgave
                if (sjekkEpost == null)
                 {
@@ -178,13 +179,14 @@ namespace WebApplication2.DAL
             db.SaveChanges();
 
             return true;
-        
-            
-         }
-        public List<>
 
-         
+
+        }
+
+
+
+
+
     }
 }
-            
  
