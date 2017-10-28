@@ -94,6 +94,30 @@ namespace WebApplication2.DAL
             }
 
         }
+        // lagrer hele reisen
+        public bool LagreReise(reise innReise)
+        {
+            using (var db = new DB())
+            {
+                try
+                {
+                    var nyReise = new Reise();
+                    nyReise.Utreise = innReise.utreise;
+                    nyReise.Hjemreise = innReise.hjemreise;
+                    nyReise.Turtid = innReise.turtid;
+                    nyReise.Returtid = innReise.returtid;
+                    nyReise.Billettpris = innReise.billettpris;
+
+                    db.Reiser.Add(nyReise);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception feil)
+                {
+                    return false;
+                }
+            }
+        }
 
         //tor sin kode
         public static Byte[] lagHash(string innPassord)
@@ -180,27 +204,7 @@ namespace WebApplication2.DAL
                 return false;
             }
         }
-        // lagrer hele reisen
-        public bool LagreReise(reise innreise)
-        {
-            var db = new DB();
-            var nyReiseRad = new Reise();
-            nyReiseRad.Hjemreise = innreise.hjemreise;
-            nyReiseRad.Utreise = innreise.utreise;
-            nyReiseRad.Turtid = innreise.turtid;
-            nyReiseRad.Returtid = innreise.returtid;
-            nyReiseRad.Billettpris = innreise.billettpris;
 
-
-
-            db.Reiser.Add(nyReiseRad);
-
-            db.SaveChanges();
-
-            return true;
-
-
-        }
 
 
 
