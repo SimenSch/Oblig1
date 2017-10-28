@@ -60,22 +60,22 @@ namespace WebApplication2.DAL
 
 
         }
-        public bool SlettReise(int innReise)
+        public bool SlettReise(int id)
         {
             using (var db = new DB())
             {
                 try
                 {
-                    Reise slettReise = db.Reiser.Find(innReise);
+                    var slettReise = db.Reiser.Find(id);
                     db.Reiser.Remove(slettReise);
                     db.SaveChanges();
+                    return true;
 
                 }
                 catch (Exception feil)
                 {
                     return false;
                 }
-                return true;
             }
             
         }

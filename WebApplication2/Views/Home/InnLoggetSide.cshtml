@@ -1,4 +1,6 @@
 ﻿<!-- vi bruker dynamic webview page og ikke modellen her.-->
+@model List<WebApplication2.Model.reise>
+
 @{
     ViewBag.Title = "InnLoggetSide";
 }
@@ -35,10 +37,9 @@
                                      <td><input type="text" value="@item.hjemreise" class="form-control" /></td>
                                      <td><input type="text" value="@item.turtid" class="form-control" /></td>
                                      <td><input type="text" value="@item.returtid" class="form-control" /></td>
-                                     <td><input type="text" value="@item.billettpris" class="form-control" /></td>
-
+                                     
                                      <td><a href="/Home/endre?id=@item.id" class="btn btn-success">Lagre</a></td>
-                                     <td><a href="/home/slett?id=@item.id" class="btn btn-danger">Slett</a></td>    
+                                     <td><a href="/home/SlettReisen?id=@item.id" class="btn btn-danger">Slett</a></td>    
                                  </tr>
                              }
                              <tr>
@@ -48,7 +49,7 @@
                                  <td><input type="text" value="" class="form-control" /></td>
                                  <td><input type="text" value="" class="form-control" /></td>
                                  <td><input type="text" value="" class="form-control" /></td>
-                                 <td><button name="LeggTil" class="btn-success">Legg Til</button></td>
+                                 <td><a href="/home/SlettReisen" class="btn btn-success">Legg Til</a></td>
                              </tr>
                          
 

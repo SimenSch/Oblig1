@@ -85,18 +85,13 @@ namespace WebApplication2.Controllers
 
 
         }
-        [HttpPost]
-        public ActionResult SlettReisen(int innReise)
+        public ActionResult SlettReisen(int id)
         {
             var db = new DbBestilling();
-            try
+            bool OK = db.SlettReise(id);
+            if (OK)
             {
-                db.SlettReise(innReise);
-                
-            }
-            catch(Exception)
-            {
-                
+                return RedirectToAction("InnloggetSide");
             }
             return View();
         }
