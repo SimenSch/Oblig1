@@ -250,24 +250,6 @@ namespace WebApplication2.Controllers
             return View();
             
         }
-        [HttpPost]
-        public ActionResult (int innReise)
-        {
-            using (var db = new DB())
-            {
-                try
-                {
-                    Reise slettReise = db.Reiser.Find(innReise);
-                    db.Reiser.Remove(slettReise);
-                    db.SaveChanges();
-                    
-                }
-                catch (Exception feil)
-                {
-                    return View();
-                }
-            }
-            return View();
-        }
+       
     }
 }
