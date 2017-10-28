@@ -60,6 +60,25 @@ namespace WebApplication2.DAL
 
 
         }
+        public bool SlettReise(int innReise)
+        {
+            using (var db = new DB())
+            {
+                try
+                {
+                    Reise slettReise = db.Reiser.Find(innReise);
+                    db.Reiser.Remove(slettReise);
+                    db.SaveChanges();
+
+                }
+                catch (Exception feil)
+                {
+                    return false;
+                }
+                return true;
+            }
+            
+        }
         //experimentell Priskalkulering kommer i oppgave 2
         public int Innpris(int billettpris1, int billettpris2, int antall, int? antall_barn)
         {
