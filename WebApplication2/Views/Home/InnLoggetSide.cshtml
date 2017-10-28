@@ -1,4 +1,4 @@
-﻿<-- vi bruker dynamic webview page og ikke modellen her.-->
+﻿<!-- vi bruker dynamic webview page og ikke modellen her.-->
 @{
     ViewBag.Title = "InnLoggetSide";
 }
@@ -16,6 +16,7 @@
                      <table class="table">
                          <thead>
                              <tr>
+                                 <th>Id</th>
                                  <th>Fra</th>
                                  <th>Til</th>
                                  <th>Utreise</th>
@@ -25,18 +26,33 @@
                              </tr>
                          </thead>
                          <tbody>
-                            
+
                              @foreach (var item in Model)
                              {
-                             <tr>
-                                 <td>@item.utreise</td>
-                                 <td>@item.hjemreise</td>
-                                 <td>@item.turtid</td>
-                                 <td>@item.returtid</td>
-                                 <td>@item.billettpris</td>
-                                 <td><button id="knapp1" class="btn-success">Kjøp</button></td>
-                             </tr>
+                                 <tr>
+                                     <td>@item.id</td>
+                                     <td><input type="text" value="@item.utreise" class="form-control" /></td>
+                                     <td><input type="text" value="@item.hjemreise" class="form-control" /></td>
+                                     <td><input type="text" value="@item.turtid" class="form-control" /></td>
+                                     <td><input type="text" value="@item.returtid" class="form-control" /></td>
+                                     <td><input type="text" value="@item.billettpris" class="form-control" /></td>
+
+                                     <td><a href="/Home/endre?id=@item.id" class="btn btn-success">Lagre</a></td>
+                                     <td><a href="/home/slett?id=@item.id" class="btn btn-danger">Slett</a></td>    
+                                 </tr>
                              }
+                             <tr>
+                                 <td></td>
+                                 <td><input type="text" value="" class="form-control" /></td>
+                                 <td><input type="text" value="" class="form-control" /></td>
+                                 <td><input type="text" value="" class="form-control" /></td>
+                                 <td><input type="text" value="" class="form-control" /></td>
+                                 <td><input type="text" value="" class="form-control" /></td>
+                                 <td><button name="LeggTil" class="btn-success">Legg Til</button></td>
+                             </tr>
+                         
+
+
                          </tbody>  
                      </table>
                  </div>
