@@ -43,10 +43,6 @@ namespace WebApplication2.DAL
 
         public int Billettpris { get; set; }
 
-        public int Antall { get; set; }
-       
-        public  int? Antallbarn { get; set; }
-
         public virtual List<Bestilling> Bestilling { get; set; }
     }
     //SKAL FLYTTES TIL DAL senere

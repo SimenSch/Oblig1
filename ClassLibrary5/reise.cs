@@ -19,7 +19,5 @@ namespace WebApplication2.Model
 
         public int billettpris{ get; set; }
 
-        public int antall { get; set; }
-        public int? antallbarn { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@model List<WebApplication2.DAL.Reise>
 @{
     ViewBag.Title = "InnLoggetSide";
 }
@@ -9,9 +9,36 @@
  <meta name="viewport" content="width=device-width" />
  <title>InnLoggetSide</title>
 </head>
-<body>
- <div>
- Du har nå kommet til en side som det er bare lov til for autoriserte brukere.
- </div>
-</body>
+    <body>
+             <div id="flyReiser" class="container">
+                 <h2>Velg reise:</h2>
+                 <div class="table-bordered">
+                     <table class="table">
+                         <thead>
+                             <tr>
+                                 <th>Fra</th>
+                                 <th>Til</th>
+                                 <th>Utreise</th>
+                                 <th>Hjemreise</th>
+                                 <th>Pris</th>
+
+                             </tr>
+                         </thead>
+                         <tbody>
+                             @foreach (var item in Model)
+                             {
+                             <tr>
+                                 <td>@item.Utreise</td>
+                                 <td>@item.Hjemreise</td>
+                                 <td>@item.Turtid</td>
+                                 <td>@item.Returtid</td>
+                                 <td>@item.Billettpris</td>
+                                 <td><button id="knapp1" class="btn-success">Kjøp</button></td>
+                             </tr>
+                             }
+                         </tbody>  
+                     </table>
+                 </div>
+             </div>
+    </body>
 </html>

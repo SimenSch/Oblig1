@@ -37,19 +37,91 @@ namespace WebApplication2.DAL
                 BrukerId = "Simenmann",
                 Passord = Funksjoner.lagHash("SimenErKjempeKul123")
             };
-            var nyReise = new Reise
+
+            var nyReise1 = new Reise
             {
-            Utreise = "",
+            Utreise = "Oslo",
 
-            Hjemreise = "",
+            Hjemreise = "Trondheim",
 
-            Turtid = "0",
+            Turtid = "05.11.2017",
 
-            Returtid = "0",
+            Returtid = "12.11.2017",
 
-            Billettpris = 0,
+            Billettpris = 499,
 
             };;
+            var nyReise2 = new Reise
+            {
+                Utreise = "Oslo",
+
+                Hjemreise = "Bergen",
+
+                Turtid = "06.11.2017",
+
+                Returtid = "13.11.2017",
+
+                Billettpris = 499,
+
+            };;
+            var nyReise3 = new Reise
+            {
+                Utreise = "Trondheim",
+
+                Hjemreise = "Bergen",
+
+                Turtid = "06.11.2017",
+
+                Returtid = "12.11.2017",
+
+                Billettpris = 349,
+
+            };;
+            var nyReise4 = new Reise
+            {
+                Utreise = "Trondheim",
+
+                Hjemreise = "Oslo",
+
+                Turtid = "07.11.2017",
+
+                Returtid = "14.11.2017",
+
+                Billettpris = 449,
+
+            }; ;
+            var nyReise5 = new Reise
+            {
+                Utreise = "Bergen",
+
+                Hjemreise = "Oslo",
+
+                Turtid = "08.11.2017",
+
+                Returtid = "15.11.2017",
+
+                Billettpris = 599,
+
+            }; ;
+            var nyReise6 = new Reise
+            {
+                Utreise = "Bergen",
+
+                Hjemreise = "Trondheim",
+
+                Turtid = "09.11.2017",
+
+                Returtid = "17.11.2017",
+
+                Billettpris = 599,
+
+            }; ;
+            context.Reiser.Add(nyReise1);
+            context.Reiser.Add(nyReise2);
+            context.Reiser.Add(nyReise3);
+            context.Reiser.Add(nyReise4);
+            context.Reiser.Add(nyReise5);
+            context.Reiser.Add(nyReise6);
 
             var nyDestinasjon1 = new Destinasjoner
             {

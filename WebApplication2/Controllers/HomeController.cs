@@ -88,6 +88,7 @@ namespace WebApplication2.Controllers
             }
             return RedirectToAction("Innlogging");
 
+
         }
         public ActionResult Registrer()
         {

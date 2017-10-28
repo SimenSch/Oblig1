@@ -130,8 +130,6 @@ namespace WebApplication2.DAL
             nyReiseRad.Utreise = innreise.utreise;
             nyReiseRad.Turtid = innreise.turtid;
             nyReiseRad.Returtid = innreise.returtid;
-            nyReiseRad.Antall = innreise.antall;
-            nyReiseRad.Antallbarn = innreise.antallbarn;
             nyReiseRad.Billettpris = innreise.billettpris;
 
 
