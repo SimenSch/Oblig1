@@ -86,12 +86,12 @@ namespace WebApplication2.Controllers
 
         }
         [HttpPost]
-        public ActionResult SlettReisen(Reise innReise)
+        public ActionResult SlettReisen(int innReise)
         {
             var db = new DbBestilling();
             try
             {
-                db.SlettReise(innReise.Id);
+                db.SlettReise(innReise);
                 
             }
             catch(Exception)
