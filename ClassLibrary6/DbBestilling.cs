@@ -4,45 +4,59 @@ using System.Linq;
 using System.Web;
 using WebApplication2.Model;
 
+
 namespace WebApplication2.DAL
 {
     //Listeobjekter til bruk i databasen
     public class DbBestilling
     {
-        //bruk av dispose se DB.cs
-        private DB db = new DB();
-
+        
+        
+        
         //destinasjoner
         public List<destinasjoner> AlleDestinasjoner()
-        {
-
+        {         
+            var db = new DB();
+            List<destinasjoner> alleDestinasjoner = db.Destinasjoner.Select(d => new destinasjoner()
             {
-                List<destinasjoner> alleDestinasjoner = db.Destinasjoner.Select(d => new destinasjoner
-                {
-                    id = d.Id,
-                    flyplass = d.Flyplass,
-                    pris = d.Pris
+                id = d.Id,
+                flyplass = d.Flyplass,
+                pris = d.Pris
 
-                }).ToList();
-                return alleDestinasjoner;
-            }
+            }).ToList();
+            return alleDestinasjoner;   
         }
-       
-            //om det skulle trenges viser vi kunden her
-            public List<kunde> alleBestillinger()
+        public List<reise> AlleReiser()
+        {
+            var db = new DB();
+            List<reise> alleReiser = db.Reiser.Select(r => new reise()
+            {
+                id = r.Id,
+                utreise = r.Utreise,
+                hjemreise = r.Hjemreise,
+                turtid = r.Turtid,
+                returtid = r.Returtid,
+                billettpris = r.Billettpris
+
+
+            }).ToList();
+            return alleReiser;
+        }
+        //om det skulle trenges viser vi kunden her
+        public List<kunde> alleBestillinger()
         {
 
+            var db = new DB();
+            List<kunde> alleKunder = db.alleBestillinger.Select(k => new kunde
             {
-                List<kunde> alleKunder = db.alleBestillinger.Select(k => new kunde
-                {
-                    id = k.Id,
-                    fornavn = k.Fornavn,
-                    etternavn = k.Etternavn,
+                id = k.Id,
+                fornavn = k.Fornavn,
+                etternavn = k.Etternavn,
                     
                    
-                }).ToList();
-                return alleKunder;
-            }
+            }).ToList();
+            return alleKunder;
+            
 
 
         }
@@ -71,6 +85,28 @@ namespace WebApplication2.DAL
             utData = algoritme.ComputeHash(innData);
             return utData;
         }
+        public static bool BrukerRegisteringSjekk_i_DB(string innBruker)
+        { 
+             using (var db = new DB())
+            {
+             
+              dbBruker funnetBruker = db.Brukere.FirstOrDefault
+            (b => b.BrukerId == innBruker);
+                if (funnetBruker !=null)
+                {
+                    return false;
+                }
+                else if(funnetBruker == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+         }
         //tor sin kode. Dette vil sendes til homekontroller og brukes i en sjekk for å finne ut om brukeren er i systemet (da må passord også være korrekt. en modifisert versjon av denne skal også brukes til å håndtere opptatte brukernavn i databasen (kun dbBruker funnetBruker = db.Brukere.FirstOrDefault. 
 
         public static bool BrukerInnloggingsjekk_i_DB(bruker innBruker)
@@ -98,8 +134,10 @@ namespace WebApplication2.DAL
 
             //setter inn hele bestillingen, tar inn modellen kunde og reise
 
-            try
-            {
+            try { 
+
+
+                var db = new DB();
                 var nyKundeRad = new Kunde();
                 nyKundeRad.Fornavn = innKunde.fornavn;
                 nyKundeRad.Etternavn = innKunde.etternavn;
@@ -125,6 +163,7 @@ namespace WebApplication2.DAL
         // lagrer hele reisen
         public bool LagreReise(reise innreise)
         {
+            var db = new DB();
             var nyReiseRad = new Reise();
             nyReiseRad.Hjemreise = innreise.hjemreise;
             nyReiseRad.Utreise = innreise.utreise;
@@ -142,6 +181,7 @@ namespace WebApplication2.DAL
         
             
          }
+        public List<>
 
          
     }

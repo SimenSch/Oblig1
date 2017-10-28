@@ -19,7 +19,7 @@ namespace WebApplication2.DAL
                 
 
             };
-            
+          
             
            
             var nyBruker1 = new dbBruker

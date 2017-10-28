@@ -20,6 +20,7 @@ namespace WebApplication2.DAL
         
 
     }
+
     public class Bestilling
     {
         public int Id { get; set; }

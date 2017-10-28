@@ -14,17 +14,10 @@ namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
-        
-        public DB db = new DB();
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        private DB db = new DB();
+
+        
         /* Disse fungerer desverre ikke
         public ActionResult lagreKunde()
         {
@@ -40,7 +33,8 @@ namespace WebApplication2.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            List<Destinasjoner> destinasjoner = db.Destinasjoner.ToList();
+            var db = new CryanairBLL();
+            List<destinasjoner> destinasjoner = db.AlleDestinasjoner();
             return View(destinasjoner);
         }
         
@@ -114,25 +108,8 @@ namespace WebApplication2.Controllers
                 return jsonSerializer.Serialize(alleFraFly);
             
         }
-        public string SjekkBrukernavn()
-        {
-            List<dbBruker> alleBrukere = db.Brukere.ToList();
-
-            var brukere = new List<string>();
-
-            foreach (dbBruker d in alleBrukere )
-            {
-                string funnetBruker = brukere.FirstOrDefault(fl => fl.Contains(d.BrukerId));
-                if (funnetBruker == null)
-                {
-                    // ikke funnet strekning i listen, legg den inn i listen
-                    brukere.Add(d.BrukerId);
-                }
-            }
-            var jsonSerializer = new JavaScriptSerializer();
-            return jsonSerializer.Serialize(brukere);
-
-        }
+       
+          
     
         [HttpPost]
         public string HentPris(string fraDest)
@@ -172,14 +149,14 @@ namespace WebApplication2.Controllers
 
         /*
          */
-
+         /*
         [HttpPost]
         public ActionResult Registrer(Kunde innKunde)
         {
-
+            var db = new CryanairBLL();
                 try
                 {
-                    db.alleBestillinger.Add(innKunde);
+                    db.AlleBestillinger.Add(innKunde);
                     db.SaveChanges();
                 }
                 catch (Exception feil)
@@ -189,7 +166,7 @@ namespace WebApplication2.Controllers
                 }
                 return RedirectToAction("Liste");
             
-        }
+        }*/
         public ActionResult BrukerRegisstrering()
         {
             return View();
@@ -202,12 +179,15 @@ namespace WebApplication2.Controllers
             {
                 return View();
             }
-           
-            
+            var nyBruker = new dbBruker();
+            if (DbBestilling.BrukerRegisteringSjekk_i_DB(nyBruker.BrukerId))
+                {
+
+
                 try
                 {
-                    var nyBruker = new dbBruker();
-                    byte[] passordDb = Funksjoner.lagHash(innBruker.passord);
+                    
+                    byte[] passordDb = DbBestilling.lagHash(innBruker.passord);
                     nyBruker.Passord = passordDb;
                     nyBruker.BrukerId = innBruker.brukerId;
                     db.Brukere.Add(nyBruker);
@@ -218,7 +198,14 @@ namespace WebApplication2.Controllers
                 {
                     return View();
                 }
-            
+            }
+            else
+            {
+               
+                return View();
+
+            }
+
         }
         public ActionResult Liste()
         {
@@ -245,6 +232,11 @@ namespace WebApplication2.Controllers
             
            
             return View();
+            
+        }
+        public ActionResult reise()
+        {
+            var db = new DbBestilling
             
         }
         public ActionResult Slett(int Id)
