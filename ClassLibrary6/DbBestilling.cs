@@ -26,8 +26,23 @@ namespace WebApplication2.DAL
             }).ToList();
             return alleDestinasjoner;   
         }
-       
-            //om det skulle trenges viser vi kunden her
+        public List<reise> AlleReiser()
+        {
+            var db = new DB();
+            List<reise> alleReiser = db.Reiser.Select(r => new reise()
+            {
+                id = r.Id,
+                utreise = r.Utreise,
+                hjemreise = r.Hjemreise,
+                turtid = r.Turtid,
+                returtid = r.Returtid,
+                billettpris = r.Billettpris
+
+
+            }).ToList();
+            return alleReiser;
+        }
+        //om det skulle trenges viser vi kunden her
         public List<kunde> alleBestillinger()
         {
 
@@ -168,6 +183,7 @@ namespace WebApplication2.DAL
         
             
          }
+        public List<>
 
          
     }

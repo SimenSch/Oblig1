@@ -107,25 +107,8 @@ namespace WebApplication2.Controllers
                 return jsonSerializer.Serialize(alleFraFly);
             
         }
-        public string SjekkBrukernavn()
-        {
-            List<dbBruker> alleBrukere = db.Brukere.ToList();
-
-            var brukere = new List<string>();
-
-            foreach (dbBruker d in alleBrukere )
-            {
-                string funnetBruker = brukere.FirstOrDefault(fl => fl.Contains(d.BrukerId));
-                if (funnetBruker == null)
-                {
-                    // ikke funnet strekning i listen, legg den inn i listen
-                    brukere.Add(d.BrukerId);
-                }
-            }
-            var jsonSerializer = new JavaScriptSerializer();
-            return jsonSerializer.Serialize(brukere);
-
-        }
+       
+          
     
         [HttpPost]
         public string HentPris(string fraDest)
@@ -248,6 +231,11 @@ namespace WebApplication2.Controllers
             
            
             return View();
+            
+        }
+        public ActionResult reise()
+        {
+            var db = new DbBestilling
             
         }
         public ActionResult Slett(int Id)
