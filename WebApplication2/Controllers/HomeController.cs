@@ -85,8 +85,9 @@ namespace WebApplication2.Controllers
 
 
         }
+       
         [HttpPost]
-        public ActionResult SlettReisen(int innReise)
+        public ActionResult InnLoggetSide(int innReise)
         {
             var db = new DbBestilling();
             try
