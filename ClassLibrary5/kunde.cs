@@ -13,6 +13,9 @@ namespace WebApplication2.Model
 
         public string etternavn { get; set; }
 
+        public string adresse { get; set; }
+
+        public string adresseid { get; set; }
      
         
     }

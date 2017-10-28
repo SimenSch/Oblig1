@@ -10,10 +10,14 @@ namespace WebApplication2.BLL
 {
     public class CryanairBLL
     {
-        public List<destinasjoner> AlleDestinasjoner() {
-
+        
+       
+        public List<destinasjoner> AlleDestinasjoner()
+        {
             var DAL = new DbBestilling();
-            return DAL.AlleDestinasjoner();
+            List<destinasjoner> alleDestinasjoner = DAL.AlleDestinasjoner();
+            
+            return alleDestinasjoner;
          }
         public List<kunde> alleBestillinger()
         {

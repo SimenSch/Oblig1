@@ -14,17 +14,10 @@ namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
-        
-        public DB db = new DB();
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        private DB db = new DB();
+
+        
         /* Disse fungerer desverre ikke
         public ActionResult lagreKunde()
         {
@@ -40,7 +33,8 @@ namespace WebApplication2.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            List<Destinasjoner> destinasjoner = db.Destinasjoner.ToList();
+            var db = new CryanairBLL();
+            List<destinasjoner> destinasjoner = db.AlleDestinasjoner();
             return View(destinasjoner);
         }
         
@@ -151,14 +145,14 @@ namespace WebApplication2.Controllers
 
         /*
          */
-
+         /*
         [HttpPost]
         public ActionResult Registrer(Kunde innKunde)
         {
-
+            var db = new CryanairBLL();
                 try
                 {
-                    db.alleBestillinger.Add(innKunde);
+                    db.AlleBestillinger.Add(innKunde);
                     db.SaveChanges();
                 }
                 catch (Exception feil)
@@ -168,7 +162,7 @@ namespace WebApplication2.Controllers
                 }
                 return RedirectToAction("Liste");
             
-        }
+        }*/
         public ActionResult BrukerRegisstrering()
         {
             return View();
@@ -181,12 +175,15 @@ namespace WebApplication2.Controllers
             {
                 return View();
             }
-           
-            
+            var nyBruker = new dbBruker();
+            if (DbBestilling.BrukerRegisteringSjekk_i_DB(nyBruker.BrukerId))
+                {
+
+
                 try
                 {
-                    var nyBruker = new dbBruker();
-                    byte[] passordDb = Funksjoner.lagHash(innBruker.passord);
+                    
+                    byte[] passordDb = DbBestilling.lagHash(innBruker.passord);
                     nyBruker.Passord = passordDb;
                     nyBruker.BrukerId = innBruker.brukerId;
                     db.Brukere.Add(nyBruker);
@@ -197,7 +194,14 @@ namespace WebApplication2.Controllers
                 {
                     return View();
                 }
-            
+            }
+            else
+            {
+               
+                return View();
+
+            }
+
         }
         public ActionResult Liste()
         {
