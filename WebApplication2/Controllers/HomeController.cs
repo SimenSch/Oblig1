@@ -85,6 +85,17 @@ namespace WebApplication2.Controllers
 
 
         }
+        public ActionResult Reg(reise innReise)
+        {
+
+            var db = new DbBestilling();
+            bool OK = db.LagreReise(innReise);
+            if (OK)
+            {
+                return RedirectToAction("InnloggetSide");
+            }
+            return View();
+        }
         [HttpPost]
         public ActionResult EndreReisen(reise innReise)
         {
@@ -97,9 +108,9 @@ namespace WebApplication2.Controllers
                 endreReise.Hjemreise = innReise.hjemreise;
                 endreReise.Turtid = innReise.turtid;
                 endreReise.Returtid = innReise.returtid;
-                endreReise.Returtid = innReise.billettpris;
+                endreReise.Billettpris = innReise.billettpris;
                 DB.SaveChanges();
-                return View();
+                return RedirectToAction("InnloggetSide");
             }
             catch (Exception)
             {
@@ -116,10 +127,9 @@ namespace WebApplication2.Controllers
             }
             return View();
         }
-        public ActionResult Registrer()
+        public ActionResult Registrer(reise innReise)
         {
-            return View();
-        }
+           
 
             var db = new DbBestilling();
             bool OK = db.LagreReise(innReise);
@@ -233,7 +243,7 @@ namespace WebApplication2.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                catch (Exception feil)
+                catch (Exception )
                 {
                     return View();
                 }

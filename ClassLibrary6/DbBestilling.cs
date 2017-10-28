@@ -112,7 +112,7 @@ namespace WebApplication2.DAL
                     db.SaveChanges();
                     return true;
                 }
-                catch (Exception feil)
+                catch (Exception )
                 {
                     return false;
                 }
@@ -199,7 +199,7 @@ namespace WebApplication2.DAL
 
                 return true;
             }
-            catch (Exception feil)
+            catch (Exception)
             {
                 return false;
             }

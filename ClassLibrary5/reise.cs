@@ -17,7 +17,7 @@ namespace WebApplication2.Model
         
         public string returtid { get; set; }
 
-        public string billettpris{ get; set; }
+        public int billettpris{ get; set; }
 
     }
 }

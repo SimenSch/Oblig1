@@ -12,55 +12,65 @@
  <title>InnLoggetSide</title>
 </head>
     <body>
-             <div id="flyReiser" class="container">
-                 <h2>Velg reise:</h2>
-                 <div class="table-bordered">
-                     <form action="/home/Reg" method="post">
-                         <table class="table">
-                             <thead>
-                                 <tr>
-                                     <th>Id</th>
-                                     <th>Fra</th>
-                                     <th>Til</th>
-                                     <th>Utreise</th>
-                                     <th>Hjemreise</th>
-                                     <th>Pris</th>
+    <div id="flyReiser" class="container">
+        <h2>Velg reise:</h2>
+        <div class="table-bordered">
+            <form action="/home/Reg" method="post">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Fra</th>
+                            <th>Til</th>
+                            <th>Utreise</th>
+                            <th>Hjemreise</th>
+                            <th>Pris</th>
 
-                                 </tr>
-                             </thead>
-                             <tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                                 @foreach (var item in Model)
-                                 {
-                                     <tr>
-                                         <td>@item.id</td>
-                                         <td><input type="text" value="@item.utreise" class="form-control" /></td>
-                                         <td><input type="text" value="@item.hjemreise" class="form-control" /></td>
-                                         <td><input type="text" value="@item.turtid" class="form-control" /></td>
-                                         <td><input type="text" value="@item.returtid" class="form-control" /></td>
-                                         <td><input type="text" value="@item.billettpris" class="form-control" /></td>
-
-                                         <td><a href="/Home/endre?id=@item.id" class="btn btn-success">Lagre</a></td>
-                                         <td><a href="/home/SlettReisen?id=@item.id" class="btn btn-danger">Slett</a></td>
-                                     </tr>
-                                 }
-
-                                 <tr>
-                                     <td></td>
-                                     <td><input type="text" name="utreise" class="form-control" /></td>
-                                     <td><input type="text" name="hjemreise" class="form-control" /></td>
-                                     <td><input type="date" name="turtid" class="form-control" /></td>
-                                     <td><input type="date" name="returtid" class="form-control" /></td>
-                                     <td><input type="number" name="billettpris" class="form-control" /></td>
-                                     <td><input type="submit" name="reg" value="Legg til" class="btn btn-info" /></td>
-                                 </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.id</td>
+                                <td><input type="text" value="@item.utreise" class="form-control" /></td>
+                                <td><input type="text" value="@item.hjemreise" class="form-control" /></td>
+                                <td><input type="text" value="@item.turtid" class="form-control" /></td>
+                                <td><input type="text" value="@item.returtid" class="form-control" /></td>
+                                <td><input type="text" value="@item.billettpris" class="form-control" /></td>
 
 
+                                <td><a href="/home/SlettReisen?id=@item.id" class="btn btn-danger">Slett</a></td>
+                            </tr>
+                        }
 
-                             </tbody>
-                         </table>
-                         </form>
-</div>
-             </div>
+                        <tr>
+                            <td></td>
+                            <td><input type="text" name="utreise" class="form-control" /></td>
+                            <td><input type="text" name="hjemreise" class="form-control" /></td>
+                            <td><input type="date" name="turtid" class="form-control" /></td>
+                            <td><input type="date" name="returtid" class="form-control" /></td>
+                            <td><input type="number" name="billettpris" class="form-control" /></td>
+                            <td><input type="submit" name="reg" value="Legg til" class="btn btn-info" /></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </form>                        
+                <form action="/home/EndreReisen" method="post">
+                    <table class="table">
+                    <tr><td><input type="text" name="id" class="form-control" /></td>
+                        <td><input type="text" name="utreise" class="form-control" /></td>
+                        <td><input type="text" name="hjemreise" class="form-control" /></td>
+                        <td><input type="date" name="turtid" class="form-control" /></td>
+                        <td><input type="date" name="returtid" class="form-control" /></td>
+                        <td><input type="number" name="billettpris" class="form-control" /></td>
+                        <td><input type="submit" name="EndreReisen" value="endre reisen" class="btn btn-info" /></td>
+                    </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
