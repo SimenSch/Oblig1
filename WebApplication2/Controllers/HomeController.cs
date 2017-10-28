@@ -120,7 +120,18 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-            
+        [HttpPost]
+        public ActionResult Reg(reise innReise)
+        {
+
+            var db = new DbBestilling();
+            bool OK = db.LagreReise(innReise);
+            if (OK)
+            {
+                return RedirectToAction("InnloggetSide");
+            }
+            return View();
+        }
         public string HentFlyplass()
         {
                 List<Destinasjoner> alleFly = db.Destinasjoner.ToList();
@@ -214,7 +225,6 @@ namespace WebApplication2.Controllers
             var nyBruker = new dbBruker();
             if (DbBestilling.BrukerRegisteringSjekk_i_DB(nyBruker.BrukerId))
                 {
-
 
                 try
                 {
