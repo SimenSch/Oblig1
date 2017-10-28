@@ -72,18 +72,20 @@ namespace WebApplication2.Controllers
         // tors Innloggingskode
         public ActionResult InnLoggetSide()
         {
+            var db = new DbBestilling();
             if (Session["LoggetInn"] != null)
             {
                 bool loggetInn = (bool)Session["LoggetInn"];
                 if (loggetInn)
                 {
-                    return View();
+                    return View(db.AlleReiser());
                 }
             }
             return RedirectToAction("Innlogging");
 
 
         }
+        
         public ActionResult Registrer()
         {
             return View();

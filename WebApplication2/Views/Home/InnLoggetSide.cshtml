@@ -1,4 +1,4 @@
-﻿@model List<WebApplication2.DAL.Reise>
+﻿<-- vi bruker dynamic webview page og ikke modellen her.-->
 @{
     ViewBag.Title = "InnLoggetSide";
 }
@@ -25,14 +25,15 @@
                              </tr>
                          </thead>
                          <tbody>
+                            
                              @foreach (var item in Model)
                              {
                              <tr>
-                                 <td>@item.Utreise</td>
-                                 <td>@item.Hjemreise</td>
-                                 <td>@item.Turtid</td>
-                                 <td>@item.Returtid</td>
-                                 <td>@item.Billettpris</td>
+                                 <td>@item.utreise</td>
+                                 <td>@item.hjemreise</td>
+                                 <td>@item.turtid</td>
+                                 <td>@item.returtid</td>
+                                 <td>@item.billettpris</td>
                                  <td><button id="knapp1" class="btn-success">Kjøp</button></td>
                              </tr>
                              }
