@@ -37,8 +37,8 @@
                                      <td><input type="text" value="@item.hjemreise" class="form-control" /></td>
                                      <td><input type="text" value="@item.turtid" class="form-control" /></td>
                                      <td><input type="text" value="@item.returtid" class="form-control" /></td>
-                                     
-                                     <td><a href="/Home/endre?id=@item.id" class="btn btn-success">Lagre</a></td>
+                                     <td><input type="number" value="@item.billettpris" class="form-control" /></td>
+                                     <td><a href="/Home/?id=@item.id" class="btn btn-success">Lagre</a></td>
                                      <td><a href="/home/SlettReisen?id=@item.id" class="btn btn-danger">Slett</a></td>    
                                  </tr>
                              }

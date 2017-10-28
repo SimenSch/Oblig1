@@ -85,6 +85,27 @@ namespace WebApplication2.Controllers
 
 
         }
+        [HttpPost]
+        public ActionResult EndreReisen(reise innReise)
+        {
+            var db = new DbBestilling();
+            var DB = new DB();
+            try
+            {
+                Reise endreReise = DB.Reiser.Find(innReise.id);
+                endreReise.Utreise = innReise.utreise;
+                endreReise.Hjemreise = innReise.hjemreise;
+                endreReise.Turtid = innReise.turtid;
+                endreReise.Returtid = innReise.returtid;
+                endreReise.Returtid = innReise.billettpris;
+                DB.SaveChanges();
+                return View();
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+         }
         public ActionResult SlettReisen(int id)
         {
             var db = new DbBestilling();
@@ -99,7 +120,7 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-
+            
         public string HentFlyplass()
         {
                 List<Destinasjoner> alleFly = db.Destinasjoner.ToList();
@@ -119,10 +140,10 @@ namespace WebApplication2.Controllers
                 return jsonSerializer.Serialize(alleFraFly);
             
         }
-       
+      
           
     
-        [HttpPost]
+        /*
         public string HentPris(string fraDest)
         {
 
@@ -137,7 +158,7 @@ namespace WebApplication2.Controllers
             
         }
        
-        
+        */
         /* public string HentPrisen()
          {
              List<Destinasjoner> alleFly = db.Destinasjoner.ToList();
