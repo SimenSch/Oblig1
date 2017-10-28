@@ -85,7 +85,21 @@ namespace WebApplication2.Controllers
 
 
         }
-        
+        [HttpPost]
+        public ActionResult SlettReisen(Reise innReise)
+        {
+            var db = new DbBestilling();
+            try
+            {
+                db.SlettReise(innReise.Id);
+                
+            }
+            catch(Exception)
+            {
+                
+            }
+            return View();
+        }
         public ActionResult Registrer()
         {
             return View();
@@ -236,23 +250,24 @@ namespace WebApplication2.Controllers
             return View();
             
         }
-        
-        public ActionResult Slett(int Id)
+        [HttpPost]
+        public ActionResult (int innReise)
         {
             using (var db = new DB())
             {
                 try
                 {
-                    Kunde slettKunde = db.alleBestillinger.Find(Id);
-                    db.alleBestillinger.Remove(slettKunde);
+                    Reise slettReise = db.Reiser.Find(innReise);
+                    db.Reiser.Remove(slettReise);
                     db.SaveChanges();
+                    
                 }
                 catch (Exception feil)
                 {
-                    // her bør det komme noe mer
+                    return View();
                 }
             }
-            return RedirectToAction("Liste");
+            return View();
         }
     }
 }
