@@ -120,9 +120,6 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult Reg(reise innReise)
-        {
 
             var db = new DbBestilling();
             bool OK = db.LagreReise(innReise);
