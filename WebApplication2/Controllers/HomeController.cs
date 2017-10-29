@@ -16,26 +16,25 @@ namespace WebApplication2.Controllers
     {
 
         private DB db = new DB();
+        private DbBestilling dbBestilling;
 
-        
-        /* Disse fungerer desverre ikke
-        public ActionResult lagreKunde()
+        public HomeController(DbBestilling dbBestilling)
         {
-            return View();
+            this.dbBestilling = dbBestilling;
         }
-        [HttpPost]
-        public ActionResult lagreKunde(kunde innkunde)
-        {
-            var db = new DbBestilling();
-            bool ok = db.Lagrekunde(innkunde);
-            return View();
-        }*/
-        // GET: Home
+
+
+       
         public ActionResult Index()
         {
             var db = new CryanairBLL();
             List<destinasjoner> destinasjoner = db.AlleDestinasjoner();
             return View(destinasjoner);
+        }
+
+        public RedirectToRouteResult RegKunde(Reise innReise)
+        {
+            throw new NotImplementedException();
         }
 
         public ActionResult AdminSide()
@@ -279,62 +278,9 @@ namespace WebApplication2.Controllers
       
           
     
-        /*
-        public string HentPris(string fraDest)
-        {
+      
 
-            List<Destinasjoner> alleDest = db.Destinasjoner.ToList();
-            List<Destinasjoner> valgtDest = new List<Destinasjoner>();
-
-            valgtDest = alleDest.Where(alle => alle.Flyplass.Equals(fraDest)).ToList();
-
-            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            string json = jsonSerializer.Serialize(valgtDest);
-            return json;
-            
-        }
-       
-        */
-        /* public string HentPrisen()
-         {
-             List<Destinasjoner> alleFly = db.Destinasjoner.ToList();
-
-             var Prisen = new List<int>();
-
-             foreach (Destinasjoner d in alleFly)
-             {
-                 int funnetPris = Prisen.FirstOrDefault(fl => fl.Contains(d.Pris));
-                 if (funnetPris == null)
-                 {
-                     // ikke funnet strekning i listen, legg den inn i listen
-                     Prisen.Add(d.Pris);
-                 }
-             }
-             var jsonSerializer = new JavaScriptSerializer();
-             return jsonSerializer.Serialize(Prisen);
-
-         }*/
-
-        /*
-         */
-         /*
-        [HttpPost]
-        public ActionResult Registrer(Kunde innKunde)
-        {
-            var db = new CryanairBLL();
-                try
-                {
-                    db.AlleBestillinger.Add(innKunde);
-                    db.SaveChanges();
-                }
-                catch (Exception feil)
-                {
-                    return View("Noe gikk feil med registeringen av din reise prøv igjen");
-
-                }
-                return RedirectToAction("Liste");
-            
-        }*/
+     
         public ActionResult BrukerRegisstrering()
         {
             return View();
