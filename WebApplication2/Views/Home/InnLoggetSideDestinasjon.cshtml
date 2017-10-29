@@ -30,14 +30,18 @@
                         {
                             <tr>
                                 <td>@item.id</td>
-                               <td>@item.flyplass"</td>
-                                <td>@item.pris"</td>
-                              
+                                <td>@item.flyplass</td>
+                                <td>@item.pris</td>
+
 
                                 <td><a href="/home/SlettDestinasjon?id=@item.id" class="btn btn-danger">Slett</a></td>
                             </tr>
                         }
-
+                        <tr>
+                            <th></th>
+                            <th>Flyplass</th>
+                            <th>Pris</th>
+                        </tr>
                         <tr>
                             <td></td>
                             <td><input type="text" name="flyplass" class="form-control" /></td>
@@ -50,15 +54,23 @@
                     </tbody>
                 </table>
             </form>
+            <h4>Endre destinasjoner ved hjelp av ID:</h4>
             <form action="/home/EndreDestinasjon" method="post">
                 <table class="table">
+                    <tr>
+                        <th>Id</th>
+                        <th>Flyplass</th>
+                        <th>Pris</th>
+
+
+                    </tr>
                     <tr>
                         <td><input type="text" name="id" class="form-control" /></td>
                         <td><input type="text" name="flyplass" class="form-control" /></td>
                         <td><input type="number" name="pris" class="form-control" /></td>
                       
 
-                        <td><input type="submit" name="EndreDestinasjon" value="endre Destinasjon" class="btn btn-info" /></td>
+                        <td><input type="submit" name="EndreDestinasjon" value="Endre Destinasjon" class="btn btn-info" /></td>
                     </tr>
                 </table>
             </form>
