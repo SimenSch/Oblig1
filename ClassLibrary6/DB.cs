@@ -14,8 +14,8 @@ namespace WebApplication2.DAL
         public int Id { get; set; }
         public string Fornavn { get; set; }
         public string Etternavn { get; set; }
-        
-
+        public string Adresse { get; set; }
+        public int Telefon { get; set; }
         public virtual List<Bestilling> Bestilling { get; set; }
         
 
@@ -46,7 +46,7 @@ namespace WebApplication2.DAL
 
         public virtual List<Bestilling> Bestilling { get; set; }
     }
-    //SKAL FLYTTES TIL DAL senere
+    
     public class Funksjoner
     {
        //tor sin kode

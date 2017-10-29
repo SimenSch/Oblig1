@@ -12,6 +12,9 @@ namespace WebApplication2.Model
     
         public int id { get; set; }
 
+        public int kundeid { get; set; }
+        public int reiseid { get; set; }
+
      
     }
 

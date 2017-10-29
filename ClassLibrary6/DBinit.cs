@@ -14,14 +14,47 @@ namespace WebApplication2.DAL
 	    {
             var nyKunde = new Kunde
             {
-                Fornavn = "fredrik",
-                Etternavn = "tremann",
-                
+                Fornavn = "Tor",
+                Etternavn = "Krattebøl",
+                Adresse = "Krattebølveienen 1",
+                Telefon = 99887767
 
             };
-          
-            
-           
+            var nyKunde2 = new Kunde
+            {
+                Fornavn = "Torkil",
+                Etternavn = "Krattebølil",
+                Adresse = "Krattebølveien 2",
+                Telefon = 99887768
+
+            };
+           var nyKunde3 = new Kunde
+            {
+                Fornavn = "Torleif",
+                Etternavn = "Krattebøleif",
+                Adresse = "Krattebølveien 3",
+                Telefon = 99887769
+
+            };
+            var nyKunde4 = new Kunde
+            {
+                Fornavn = "Toralf",
+                Etternavn = "Krattebalf",
+                Adresse = "Krattebølveien 4",
+                Telefon = 99887766
+
+            };
+            var nyKunde5 = new Kunde
+            {
+                Fornavn = "Tormod",
+                Etternavn = "Krattebølmod",
+                Adresse = "Krattebølveien 5",
+                Telefon = 99887761
+
+            };
+
+
+
             var nyBruker1 = new dbBruker
             {
                 BrukerId = "Tormann",
@@ -44,9 +77,9 @@ namespace WebApplication2.DAL
 
             Hjemreise = "Trondheim",
 
-            Turtid = "05.11.2017",
+            Turtid = "2017.05.11",
 
-            Returtid = "12.11.2017",
+            Returtid = "2017.12.11",
 
             Billettpris = 499,
 
@@ -57,9 +90,9 @@ namespace WebApplication2.DAL
 
                 Hjemreise = "Bergen",
 
-                Turtid = "06.11.2017",
+                Turtid = "2017.06.12",
 
-                Returtid = "13.11.2017",
+                Returtid = "2017.13.11",
 
                 Billettpris = 499,
 
@@ -70,9 +103,9 @@ namespace WebApplication2.DAL
 
                 Hjemreise = "Bergen",
 
-                Turtid = "06.11.2017",
+                Turtid = "2017.06.11",
 
-                Returtid = "12.11.2017",
+                Returtid = "2017.12.11",
 
                 Billettpris = 349,
 
@@ -83,9 +116,9 @@ namespace WebApplication2.DAL
 
                 Hjemreise = "Oslo",
 
-                Turtid = "07.11.2017",
+                Turtid = "2017.07.11",
 
-                Returtid = "14.11.2017",
+                Returtid = "2017.14.11",
 
                 Billettpris = 449,
 
@@ -96,9 +129,9 @@ namespace WebApplication2.DAL
 
                 Hjemreise = "Oslo",
 
-                Turtid = "08.11.2017",
+                Turtid = "2017.08.11",
 
-                Returtid = "15.11.2017",
+                Returtid = "2017.15.11",
 
                 Billettpris = 599,
 
@@ -109,9 +142,9 @@ namespace WebApplication2.DAL
 
                 Hjemreise = "Trondheim",
 
-                Turtid = "09.11.2017",
+                Turtid = "2017.09.11",
 
-                Returtid = "17.11.2017",
+                Returtid = "2017.17.11",
 
                 Billettpris = 599,
 
@@ -163,6 +196,11 @@ namespace WebApplication2.DAL
             context.Brukere.Add(nyBruker1);
             context.Brukere.Add(nyBruker2);
             context.Brukere.Add(nyBruker3);
+            context.alleBestillinger.Add(nyKunde);
+            context.alleBestillinger.Add(nyKunde2);
+            context.alleBestillinger.Add(nyKunde3);
+            context.alleBestillinger.Add(nyKunde4);
+            context.alleBestillinger.Add(nyKunde5);
             base.Seed(context);
            
                
