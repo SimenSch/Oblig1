@@ -40,7 +40,16 @@ namespace WebApplication2.Controllers
 
         public ActionResult AdminSide()
         {
-            return View();
+            var db = new DbBestilling();
+            if (Session["LoggetInn"] != null)
+            {
+                bool loggetInn = (bool)Session["LoggetInn"];
+                if (loggetInn)
+                {
+                    return View();
+                }
+            }
+            return RedirectToAction("Innlogging");
         }
         //tor sin kode for innlogging ViewBag.Innlogget brukes i Innlogging for å sjekke om vi er innlogget eller ikke. se Innlogging.cshtml linje 40
         public ActionResult Innlogging()
