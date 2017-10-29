@@ -144,6 +144,7 @@
     <Content Include="Views\Home\BrukerRegisstrering.cshtml" />
     <Content Include="Views\Home\Innlogging.cshtml" />
     <Content Include="Views\Home\InnLoggetSide.cshtml" />
+    <Content Include="Views\Home\InnLoggetSideKunde.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

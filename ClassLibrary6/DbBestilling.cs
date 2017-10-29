@@ -52,6 +52,8 @@ namespace WebApplication2.DAL
                 id = k.Id,
                 fornavn = k.Fornavn,
                 etternavn = k.Etternavn,
+                adresse = k.Adresse,
+                telefon = k.Telefon
 
 
             }).ToList();
@@ -67,17 +69,16 @@ namespace WebApplication2.DAL
                 try
                 {
                     var slettReise = db.Reiser.Find(id);
+
                     db.Reiser.Remove(slettReise);
                     db.SaveChanges();
                     return true;
-
                 }
                 catch (Exception)
                 {
                     return false;
                 }
             }
-            
         }
         //experimentell Priskalkulering kommer i oppgave 2
         public int Innpris(int billettpris1, int billettpris2, int antall, int? antall_barn)
@@ -92,7 +93,46 @@ namespace WebApplication2.DAL
                 var billettpris = (billettpris1 + billettpris2 * antall);
                 return billettpris;
             }
+        }
+        public bool SlettKunde(int id)
+        {
+            using (var db = new DB())
+            {
+                try
+                {
+                    var slettKunde = db.alleBestillinger.Find(id);
 
+                    db.alleBestillinger.Remove(slettKunde);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+        public bool LagreKunden(kunde innKunde)
+        {
+            using (var db = new DB())
+            {
+                try
+                { 
+                    var nyKunde = new Kunde();
+                    nyKunde.Fornavn = innKunde.fornavn;
+                    nyKunde.Etternavn = innKunde.etternavn;
+                    nyKunde.Adresse = innKunde.adresse;
+                    nyKunde.Telefon = innKunde.telefon;    
+
+                    db.alleBestillinger.Add(nyKunde);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
         }
         // lagrer hele reisen
         public bool LagreReise(reise innReise)
@@ -167,49 +207,8 @@ namespace WebApplication2.DAL
                 {
                     return true;
                 }
-
             }
         }
-
-        //lagrer kunden
-        public bool Lagrekunde(kunde innKunde)
-        {
-
-            //setter inn hele bestillingen, tar inn modellen kunde og reise
-
-            try
-            {
-
-
-                var db = new DB();
-                var nyKundeRad = new Kunde();
-                nyKundeRad.Fornavn = innKunde.fornavn;
-                nyKundeRad.Etternavn = innKunde.etternavn;
-
-                /* til senere oppgave
-               if (sjekkEpost == null)
-                {
-                    var Kontaktinforad = new Kontaktinfo();
-                    Kontaktinforad.Epost = innbestilling.epost;
-                    Kontaktinforad.Telefon = innbestilling.telefon;
-
-                }*/
-                db.alleBestillinger.Add(nyKundeRad);
-                db.SaveChanges();
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-
-
-
-
-
     }
 }
  

@@ -85,6 +85,32 @@ namespace WebApplication2.Controllers
 
 
         }
+        public ActionResult InnLoggetSideKunde()
+        {
+            var db = new DbBestilling();
+            if (Session["LoggetInn"] != null)
+            {
+                bool loggetInn = (bool)Session["LoggetInn"];
+                if (loggetInn)
+                {
+                    return View(db.alleBestillinger());
+                }
+            }
+            return RedirectToAction("Innlogging");
+
+
+        }
+        public ActionResult RegKunde(kunde innKunde)
+        {
+
+            var db = new DbBestilling();
+            bool OK = db.LagreKunden(innKunde);
+            if (OK)
+            {
+                return RedirectToAction("InnloggetSideKunde");
+            }
+            return View();
+        }
         public ActionResult Reg(reise innReise)
         {
 
@@ -116,7 +142,40 @@ namespace WebApplication2.Controllers
             {
                 return View();
             }
-         }
+        }
+
+
+             [HttpPost]
+        public ActionResult EndreKunden(kunde innKunde)
+        {
+            var db = new DbBestilling();
+            var DB = new DB();
+            try
+            {
+                Kunde endreKunde = DB.alleBestillinger.Find(innKunde.id);
+                endreKunde.Fornavn = innKunde.fornavn;
+                endreKunde.Etternavn = innKunde.etternavn;
+                endreKunde.Adresse = innKunde.adresse;
+                endreKunde.Telefon= innKunde.telefon;
+               
+                DB.SaveChanges();
+                return RedirectToAction("InnloggetSideKunde");
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+        public ActionResult SlettKunden(int id)
+        {
+            var db = new DbBestilling();
+            bool OK = db.SlettKunde(id);
+            if (OK)
+            {
+                return RedirectToAction("InnloggetSideKunde");
+            }
+            return View();
+        }
         public ActionResult SlettReisen(int id)
         {
             var db = new DbBestilling();
