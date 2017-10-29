@@ -50,13 +50,21 @@ namespace WebApplication2.DAL
     public class Funksjoner
     {
        //tor sin kode
-        public static Byte[] lagHash(string innPassord)
+        public static Byte[] lagHash(string innPassord )
         {
-            byte[] innData, utData;
-            var algoritme = System.Security.Cryptography.SHA256.Create();
-            innData = System.Text.Encoding.ASCII.GetBytes(innPassord);
-            utData = algoritme.ComputeHash(innData);
-            return utData;
+            
+                
+                byte[] innData, utData;
+                var algoritme = System.Security.Cryptography.SHA256.Create();
+                innData = System.Text.Encoding.ASCII.GetBytes(innPassord);
+                utData = algoritme.ComputeHash(innData);
+                return utData;
+           
+                
+            
+           
+                
+            
         }
         //tor sin kode. Dette vil sendes til homekontroller og brukes i en sjekk for å finne ut om brukeren er i systemet (da må passord også være korrekt. en modifisert versjon av denne skal også brukes til å håndtere opptatte brukernavn i databasen (kun dbBruker funnetBruker = db.Brukere.FirstOrDefault. 
 

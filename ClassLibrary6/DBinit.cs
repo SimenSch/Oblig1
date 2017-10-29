@@ -149,12 +149,7 @@ namespace WebApplication2.DAL
                 Billettpris = 599,
 
             }; ;
-            context.Reiser.Add(nyReise1);
-            context.Reiser.Add(nyReise2);
-            context.Reiser.Add(nyReise3);
-            context.Reiser.Add(nyReise4);
-            context.Reiser.Add(nyReise5);
-            context.Reiser.Add(nyReise6);
+           
 
             var nyDestinasjon1 = new Destinasjoner
             {
@@ -187,6 +182,12 @@ namespace WebApplication2.DAL
                 Flyplass = "Torp",
                 Pris = 299
             };
+            context.Reiser.Add(nyReise1);
+            context.Reiser.Add(nyReise2);
+            context.Reiser.Add(nyReise3);
+            context.Reiser.Add(nyReise4);
+            context.Reiser.Add(nyReise5);
+            context.Reiser.Add(nyReise6);
             context.Destinasjoner.Add(nyDestinasjon1);
             context.Destinasjoner.Add(nyDestinasjon2);
             context.Destinasjoner.Add(nyDestinasjon3);

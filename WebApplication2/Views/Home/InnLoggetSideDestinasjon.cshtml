@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WebApplication2.Model.destinasjoner>
+@{
+    ViewBag.Title = "InnLoggetSideDestinasjon";
+}
+<!DOCTYPE html>
+<
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InnLoggetSideKunde</title>
+</head>
+<body>
+    <div id="flyDestinasjon" class="container">
+        <h2>Velg reise:</h2>
+        <div class="table-bordered">
+            <form action="/home/RegDestinasjon" method="post">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Flyplass</th>
+                            <th>Pris</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.id</td>
+                               <td>@item.flyplass"</td>
+                                <td>@item.pris"</td>
+                              
+
+                                <td><a href="/home/SlettDestinasjon?id=@item.id" class="btn btn-danger">Slett</a></td>
+                            </tr>
+                        }
+
+                        <tr>
+                            <td></td>
+                            <td><input type="text" name="flyplass" class="form-control" /></td>
+                            <td><input type="number" name="pris" class="form-control" /></td>
+                        
+
+                            <td><input type="submit" name="regDestinasjon" value="Legg til" class="btn btn-info" /></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </form>
+            <form action="/home/EndreDestinasjon" method="post">
+                <table class="table">
+                    <tr>
+                        <td><input type="text" name="id" class="form-control" /></td>
+                        <td><input type="text" name="flyplass" class="form-control" /></td>
+                        <td><input type="number" name="pris" class="form-control" /></td>
+                      
+
+                        <td><input type="submit" name="EndreDestinasjon" value="endre Destinasjon" class="btn btn-info" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

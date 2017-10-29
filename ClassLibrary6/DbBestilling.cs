@@ -7,13 +7,13 @@ using WebApplication2.Model;
 
 namespace WebApplication2.DAL
 {
-    //Listeobjekter til bruk i databasen
+    
     public class DbBestilling
     {
 
 
 
-        //destinasjoner
+        //listeobjekter:
         public List<destinasjoner> AlleDestinasjoner()
         {
             var db = new DB();
@@ -42,7 +42,7 @@ namespace WebApplication2.DAL
             }).ToList();
             return alleReiser;
         }
-        //om det skulle trenges viser vi kunden her
+        
         public List<kunde> alleBestillinger()
         {
 
@@ -62,6 +62,7 @@ namespace WebApplication2.DAL
 
 
         }
+        //sletteobjekter:
         public bool SlettReise(int id)
         {
             using (var db = new DB())
@@ -80,20 +81,7 @@ namespace WebApplication2.DAL
                 }
             }
         }
-        //experimentell Priskalkulering kommer i oppgave 2
-        public int Innpris(int billettpris1, int billettpris2, int antall, int? antall_barn)
-        {
-            if (antall_barn > 0)
-            {
-                var billettpris = (billettpris1 + billettpris2 * antall) + (billettpris1 + billettpris2 * (int)antall_barn / 2);
-                return billettpris;
-            }
-            else
-            {
-                var billettpris = (billettpris1 + billettpris2 * antall);
-                return billettpris;
-            }
-        }
+        
         public bool SlettKunde(int id)
         {
             using (var db = new DB())
@@ -112,6 +100,25 @@ namespace WebApplication2.DAL
                 }
             }
         }
+        public bool SlettDestinasjon(int id)
+        {
+            using (var db = new DB())
+            {
+                try
+                {
+                    var slettDestinasjon = db.Destinasjoner.Find(id);
+
+                    db.Destinasjoner.Remove(slettDestinasjon);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+        //lagreobjekter:
         public bool LagreKunden(kunde innKunde)
         {
             using (var db = new DB())
@@ -134,7 +141,6 @@ namespace WebApplication2.DAL
                 }
             }
         }
-        // lagrer hele reisen
         public bool LagreReise(reise innReise)
         {
             using (var db = new DB())
@@ -158,7 +164,26 @@ namespace WebApplication2.DAL
                 }
             }
         }
-
+        public bool LagreDestinasjon(destinasjoner innDestinasjon)
+        {
+            using (var db = new DB())
+            {
+                try
+                {
+                    var nyDestinasjon = new Destinasjoner();
+                    nyDestinasjon.Flyplass = innDestinasjon.flyplass;
+                    nyDestinasjon.Pris = innDestinasjon.pris;
+                    db.Destinasjoner.Add(nyDestinasjon);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+        //Testeobjekter:
         //tor sin kode
         public static Byte[] lagHash(string innPassord)
         {
@@ -190,22 +215,30 @@ namespace WebApplication2.DAL
 
             }
         }
-        //tor sin kode. Dette vil sendes til homekontroller og brukes i en sjekk for å finne ut om brukeren er i systemet (da må passord også være korrekt. en modifisert versjon av denne skal også brukes til å håndtere opptatte brukernavn i databasen (kun dbBruker funnetBruker = db.Brukere.FirstOrDefault. 
+        //tor sin kode. 
 
         public static bool BrukerInnloggingsjekk_i_DB(bruker innBruker)
         {
+
             using (var db = new DB())
-            {
-                byte[] passordDb = lagHash(innBruker.passord);
-                dbBruker funnetBruker = db.Brukere.FirstOrDefault
-                (b => b.Passord == passordDb && b.BrukerId == innBruker.brukerId);
-                if (funnetBruker == null)
+            {if (innBruker.passord != null)
                 {
-                    return false;
+                    byte[] passordDb = lagHash(innBruker.passord);
+                    dbBruker funnetBruker = db.Brukere.FirstOrDefault
+                    (b => b.Passord == passordDb && b.BrukerId == innBruker.brukerId);
+
+                    if (funnetBruker == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
-                    return true;
+                    return false;
                 }
             }
         }

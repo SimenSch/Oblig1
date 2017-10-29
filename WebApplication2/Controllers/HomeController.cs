@@ -42,6 +42,7 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
+        //innlogging:
         //tor sin kode for innlogging ViewBag.Innlogget brukes i Innlogging for å sjekke om vi er innlogget eller ikke. se Innlogging.cshtml linje 40
         public ActionResult Innlogging()
         {
@@ -104,6 +105,33 @@ namespace WebApplication2.Controllers
 
 
         }
+        public ActionResult InnLoggetSideDestinasjon()
+        {
+            var db = new DbBestilling();
+            if (Session["LoggetInn"] != null)
+            {
+                bool loggetInn = (bool)Session["LoggetInn"];
+                if (loggetInn)
+                {
+                    return View(db.AlleDestinasjoner());
+                }
+            }
+            return RedirectToAction("Innlogging");
+
+
+        }
+        //registreringsobjekter:
+        public ActionResult RegDestinasjon(destinasjoner innDestinasjon)
+        {
+
+            var db = new DbBestilling();
+            bool OK = db.LagreDestinasjon(innDestinasjon);
+            if (OK)
+            {
+                return RedirectToAction("InnloggetSideDestinasjon");
+            }
+            return View();
+        }
         public ActionResult RegKunde(kunde innKunde)
         {
 
@@ -126,6 +154,27 @@ namespace WebApplication2.Controllers
             }
             return View();
         }
+        //endreobjekter
+        [HttpPost]
+        public ActionResult EndreDestinasjon(destinasjoner innDestinasjon)
+        {
+            var db = new DbBestilling();
+            var DB = new DB();
+            try
+            {
+                Destinasjoner endreDestinasjon = DB.Destinasjoner.Find(innDestinasjon.id);
+                endreDestinasjon.Flyplass = innDestinasjon.flyplass;
+                endreDestinasjon.Pris = innDestinasjon.pris;
+              
+               
+                DB.SaveChanges();
+                return RedirectToAction("InnloggetSideDestinasjon");
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
         [HttpPost]
         public ActionResult EndreReisen(reise innReise)
         {
@@ -147,9 +196,7 @@ namespace WebApplication2.Controllers
                 return View();
             }
         }
-
-
-             [HttpPost]
+        [HttpPost]
         public ActionResult EndreKunden(kunde innKunde)
         {
             var db = new DbBestilling();
@@ -170,6 +217,7 @@ namespace WebApplication2.Controllers
                 return View();
             }
         }
+        //sletteobjekter:
         public ActionResult SlettKunden(int id)
         {
             var db = new DbBestilling();
@@ -190,15 +238,13 @@ namespace WebApplication2.Controllers
             }
             return View();
         }
-        public ActionResult Registrer(reise innReise)
+        public ActionResult SlettDestinasjon(int id)
         {
-           
-
             var db = new DbBestilling();
-            bool OK = db.LagreReise(innReise);
+            bool OK = db.SlettDestinasjon(id);
             if (OK)
             {
-                return RedirectToAction("InnloggetSide");
+                return RedirectToAction("InnloggetSideDestinasjon");
             }
             return View();
         }
