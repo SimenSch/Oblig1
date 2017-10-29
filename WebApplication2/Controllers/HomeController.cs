@@ -37,7 +37,11 @@ namespace WebApplication2.Controllers
             List<destinasjoner> destinasjoner = db.AlleDestinasjoner();
             return View(destinasjoner);
         }
-        
+
+        public ActionResult AdminSide()
+        {
+            return View();
+        }
         //tor sin kode for innlogging ViewBag.Innlogget brukes i Innlogging for å sjekke om vi er innlogget eller ikke. se Innlogging.cshtml linje 40
         public ActionResult Innlogging()
         {
