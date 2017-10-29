@@ -13,18 +13,18 @@
 </head>
 <body>
     <div id="flyKunder" class="container">
-        <h2>Velg reise:</h2>
+        <h2>Kunde redigering:</h2>
         <div class="table-bordered">
             <form action="/home/RegKunde" method="post">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Fra</th>
-                            <th>Til</th>
-                            <th>Utreise</th>
-                            <th>Hjemreise</th>
-                            <th>Pris</th>
+                            <th>Fornavn</th>
+                            <th>Etternavn</th>
+                            <th>Adresse</th>
+                            <th>Telefonnummer</th>
+                          
 
                         </tr>
                     </thead>
@@ -34,14 +34,22 @@
                         {
                             <tr>
                                 <td>@item.id</td>
-                                <td><input type="text" value="@item.fornavn" class="form-control" /></td>
-                                <td><input type="text" value="@item.etternavn" class="form-control" /></td>
-                                <td><input type="text" value="@item.adresse" class="form-control" /></td>
-                                <td><input type="text" value="@item.telefon" class="form-control" /></td>                                
+                                <td>@item.fornavn</td>
+                                <td>@item.etternavn</td>
+                                <td>@item.adresse</td>
+                                <td>@item.telefon</td>                                
 
                                 <td><a href="/home/SlettKunden?id=@item.id" class="btn btn-danger">Slett</a></td>
                             </tr>
                         }
+                        <tr>
+
+                            <td><strong></strong><br /></td>
+                            <td><strong>Fornavn</strong><br /></td>
+                            <td><strong>Etternavn</strong><br /></td>
+                            <td><strong>Adresse</strong><br /></td>
+                            <td><strong>Telefonnummer</strong><br /></td>
+                        </tr>
 
                         <tr>
                             <td></td>
@@ -56,8 +64,18 @@
                     </tbody>
                 </table>
             </form>
+            <h4>Endre kunde ved hjelp av ID:</h4>
             <form action="/home/EndreKunden" method="post">
                 <table class="table">
+                    <tr>
+                        <th>Id</th>
+                        <th>Fornavn</th>
+                        <th>Etternavn</th>
+                        <th>Adresse</th>
+                        <th>Telefonnummer</th>
+
+
+                    </tr>
                     <tr>
                         <td><input type="text" name="id" class="form-control" /></td>
                         <td><input type="text" name="fornavn" class="form-control" /></td>
@@ -65,7 +83,7 @@
                         <td><input type="text" name="adresse" class="form-control" /></td>
                         <td><input type="number" name="telefon" class="form-control" /></td>
                       
-                        <td><input type="submit" name="EndreKunden" value="endre Kunden" class="btn btn-info" /></td>
+                        <td><input type="submit" name="EndreKunden" value="Endre Kunden" class="btn btn-info" /></td>
                     </tr>
                 </table>
             </form>
