@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "InnLoggetSideLog";
+}
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InnLoggetSideLog</title>
+</head>
+<body>
+    <div id="flyKunder" class="container">
+        <h2>Reiselog</h2>
+        <div class="table-bordered">  
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Utreise</th>
+                            <th>Hjemreise</th>
+                            <th>Turtid</th>
+                            <th>Returtid</th>
+                            <th>Billettpris</th>
+                            <th>Logdato</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.id</td>
+                                <td>@item.utreise</td>
+                                <td>@item.hjemreise</td>
+                                <td>@item.turtid</td>
+                                <td>@item.returtid</td>
+                                <td>@item.billettpris</td>
+                                <td>@item.logdato</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>    
+        </div>
+    </div>
+</body>
+</html>

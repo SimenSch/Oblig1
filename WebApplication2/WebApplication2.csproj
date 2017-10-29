@@ -147,6 +147,7 @@
     <Content Include="Views\Home\AdminSide.cshtml" />
     <Content Include="Views\Home\InnLoggetSideDestinasjon.cshtml" />
     <Content Include="Views\Home\InnLoggetSideKunde.cshtml" />
+    <Content Include="Views\Home\InnLoggetSideLog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="bestilling.cs" />
     <Compile Include="bruker.cs" />
+    <Compile Include="log.cs" />
     <Compile Include="destinasjoner.cs" />
     <Compile Include="kunde.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

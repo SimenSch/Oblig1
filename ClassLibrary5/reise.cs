@@ -20,6 +20,6 @@ namespace WebApplication2.Model
         public string returtid { get; set; }
       
         public int billettpris{ get; set; }
-
+        public string logdato { get; set; }
     }
 }

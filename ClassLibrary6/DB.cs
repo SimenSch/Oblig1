@@ -9,6 +9,26 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication2.DAL
 {
+    //vi loggfører kun reisen på grunn av tidsmangel (kun 2 på gruppen, gjerne les Readme for dette.)
+    
+    public class Log
+    {
+      
+        public int Id { get; set; }
+
+        public string Utreise { get; set; }
+
+        public string Hjemreise { get; set; }
+
+        public string Turtid { get; set; }
+
+        public string Returtid { get; set; }
+
+        public int Billettpris { get; set; }
+
+        public DateTime Logdato { get; set; }
+
+    }
     public class Kunde
     {
         public int Id { get; set; }
@@ -112,7 +132,7 @@ namespace WebApplication2.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-        
+        public virtual DbSet<Log> Logging { get; set; }
         public virtual DbSet<Kunde> alleBestillinger { get; set; }
         public virtual DbSet<dbBruker> Brukere { get; set; }
         public virtual DbSet<Reise> Reiser { get; set; }

@@ -17,20 +17,6 @@ namespace WebApplication2.Controllers
 
         private DB db = new DB();
 
-        
-        /* Disse fungerer desverre ikke
-        public ActionResult lagreKunde()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult lagreKunde(kunde innkunde)
-        {
-            var db = new DbBestilling();
-            bool ok = db.Lagrekunde(innkunde);
-            return View();
-        }*/
-        // GET: Home
         public ActionResult Index()
         {
             var db = new CryanairBLL();
@@ -99,7 +85,21 @@ namespace WebApplication2.Controllers
 
 
         }
-        public ActionResult InnLoggetSideKunde()
+        public ActionResult InnLoggetSideLog()
+        {
+            var db = new DbBestilling();
+            if (Session["LoggetInn"] != null)
+            {
+                bool loggetInn = (bool)Session["LoggetInn"];
+                if (loggetInn)
+                {
+                    return View(db.AlleLog());
+                }
+            }
+            return RedirectToAction("Innlogging");
+
+        }
+            public ActionResult InnLoggetSideKunde()
         {
             var db = new DbBestilling();
             if (Session["LoggetInn"] != null)
@@ -171,6 +171,7 @@ namespace WebApplication2.Controllers
             var DB = new DB();
             try
             {
+                
                 Destinasjoner endreDestinasjon = DB.Destinasjoner.Find(innDestinasjon.id);
                 endreDestinasjon.Flyplass = innDestinasjon.flyplass;
                 endreDestinasjon.Pris = innDestinasjon.pris;
@@ -192,6 +193,9 @@ namespace WebApplication2.Controllers
             try
             {
                 Reise endreReise = DB.Reiser.Find(innReise.id);
+                //burde ha lagd en for hver endring, men det ble nedprioritert.
+                db.LagreLog(innReise.id);
+                DB.SaveChanges();
                 endreReise.Utreise = innReise.utreise;
                 endreReise.Hjemreise = innReise.hjemreise;
                 endreReise.Turtid = innReise.turtid;

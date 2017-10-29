@@ -42,7 +42,23 @@ namespace WebApplication2.DAL
             }).ToList();
             return alleReiser;
         }
-        
+        public List<log> AlleLog()
+        {
+            var db = new DB();
+            
+            List<log> alleLog = db.Logging.Select(r => new log()
+            {
+                id = r.Id,
+                utreise = r.Utreise,
+                hjemreise = r.Hjemreise,
+                turtid = r.Turtid,
+                returtid = r.Returtid,
+                billettpris = r.Billettpris,
+                logdato = r.Logdato
+
+            }).ToList();
+            return alleLog;
+        }
         public List<kunde> alleBestillinger()
         {
 
@@ -141,6 +157,32 @@ namespace WebApplication2.DAL
                 }
             }
         }
+        public bool LagreLog(int innId)
+        {
+            using (var db = new DB())
+            {
+                try
+                {
+                    var reise = new Reise();
+                    var nyLog = new Log();
+                    
+                    Reise endreReise = db.Reiser.Find(innId);
+                    nyLog.Utreise = endreReise.Utreise;
+                    nyLog.Hjemreise = endreReise.Hjemreise;
+                    nyLog.Turtid = endreReise.Turtid;
+                    nyLog.Returtid = endreReise.Returtid;
+                    nyLog.Billettpris = endreReise.Billettpris;
+                    nyLog.Logdato = DateTime.Now;
+                    db.Logging.Add(nyLog);
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception )
+                {
+                    return false;
+                }
+            }
+        }
         public bool LagreReise(reise innReise)
         {
             using (var db = new DB())
@@ -158,7 +200,7 @@ namespace WebApplication2.DAL
                     db.SaveChanges();
                     return true;
                 }
-                catch (Exception )
+                catch (Exception)
                 {
                     return false;
                 }
